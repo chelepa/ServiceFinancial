@@ -1,0 +1,4 @@
+CREATE TABLE IF NOT EXISTS tb_months (
+  id_months INT NOT NULL AUTO_INCREMENT,
+  nm_months VARCHAR(45) NOT NULL,
+  PRIMARY KEY (id_months))
