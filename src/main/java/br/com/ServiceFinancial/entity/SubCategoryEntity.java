@@ -24,6 +24,7 @@ public class SubCategoryEntity implements Serializable {
     @Column(name = "nm_sub_category")
     private String name;
 
-    @Column(name = "id_category")
+    @ManyToOne
+    @JoinColumn(name = "id_category")
     private CategoryEntity category;
 }
