@@ -3,10 +3,12 @@ package br.com.ServiceFinancial.service.base;
 import br.com.ServiceFinancial.entity.CategoryEntity;
 import br.com.ServiceFinancial.entity.SubCategoryEntity;
 import br.com.ServiceFinancial.entity.UserEntity;
+import br.com.ServiceFinancial.entity.YearEntity;
 import br.com.ServiceFinancial.exceptions.CategoryNotFoundException;
 import br.com.ServiceFinancial.repository.CategoryRepository;
 import br.com.ServiceFinancial.repository.SubCategoryRepository;
 import br.com.ServiceFinancial.repository.UserRepository;
+import br.com.ServiceFinancial.repository.YearRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +25,9 @@ public class BaseService {
 
     @Autowired
     private SubCategoryRepository subCategoryRepository;
+
+    @Autowired
+    private YearRepository yearRepository;
 
     protected CategoryEntity saveCategory(CategoryEntity entity){
         return categoryRepository.save(entity);
@@ -66,5 +71,21 @@ public class BaseService {
 
     protected void removeSubCategory(SubCategoryEntity entity) {
         subCategoryRepository.delete(entity);
+    }
+
+    protected YearEntity saveYear(YearEntity entity) {
+        return yearRepository.save(entity);
+    }
+
+    protected YearEntity searchYearById(Long id) {
+        return yearRepository.findById(id).orElseThrow(() -> new CategoryNotFoundException(String.format("Category Not Found - Id: [%s] ", id)));
+    }
+
+    protected List<YearEntity> searchAllYear() {
+        return yearRepository.findAll();
+    }
+
+    protected void removeYear(YearEntity entity) {
+        yearRepository.delete(entity);
     }
 }

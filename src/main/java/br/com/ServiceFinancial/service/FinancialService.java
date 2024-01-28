@@ -6,6 +6,8 @@ import br.com.ServiceFinancial.dto.sub_category.SubCategoryRequestDTO;
 import br.com.ServiceFinancial.dto.sub_category.SubCategoryResponseDTO;
 import br.com.ServiceFinancial.dto.users.UserRequestDTO;
 import br.com.ServiceFinancial.dto.users.UserResponseDTO;
+import br.com.ServiceFinancial.dto.year.YearRequestDTO;
+import br.com.ServiceFinancial.dto.year.YearResponseDTO;
 
 import java.util.List;
 
@@ -26,4 +28,9 @@ public interface FinancialService {
     List<SubCategoryResponseDTO> getAllSubCategory();
     void deleteSubCategory(Long id);
     SubCategoryResponseDTO updateSubCategoryById(Long id, SubCategoryRequestDTO request);
+
+    YearResponseDTO createYear(YearRequestDTO request);
+    YearResponseDTO getYearById(Long id);
+    List<YearResponseDTO> getAllYear();
+    void deleteYearById(Long id);
 }

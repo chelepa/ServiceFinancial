@@ -6,9 +6,12 @@ import br.com.ServiceFinancial.dto.sub_category.SubCategoryRequestDTO;
 import br.com.ServiceFinancial.dto.sub_category.SubCategoryResponseDTO;
 import br.com.ServiceFinancial.dto.users.UserRequestDTO;
 import br.com.ServiceFinancial.dto.users.UserResponseDTO;
+import br.com.ServiceFinancial.dto.year.YearRequestDTO;
+import br.com.ServiceFinancial.dto.year.YearResponseDTO;
 import br.com.ServiceFinancial.service.category.CategoryService;
 import br.com.ServiceFinancial.service.sub_category.SubCategoryService;
 import br.com.ServiceFinancial.service.user.UserService;
+import br.com.ServiceFinancial.service.year.YearService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +28,9 @@ public class FinancialServiceImpl implements FinancialService {
 
     @Autowired
     private SubCategoryService subCategoryService;
+
+    @Autowired
+    private YearService yearService;
 
     @Override
     public CategoryResponseDTO createCategory(CategoryRequestDTO request) {
@@ -89,5 +95,25 @@ public class FinancialServiceImpl implements FinancialService {
     @Override
     public SubCategoryResponseDTO updateSubCategoryById(Long id, SubCategoryRequestDTO request) {
         return subCategoryService.updateSubCategoryById(id, request);
+    }
+
+    @Override
+    public YearResponseDTO createYear(YearRequestDTO request) {
+        return yearService.createYear(request);
+    }
+
+    @Override
+    public YearResponseDTO getYearById(Long id) {
+        return yearService.getYearById(id);
+    }
+
+    @Override
+    public List<YearResponseDTO> getAllYear() {
+        return yearService.getAllYear();
+    }
+
+    @Override
+    public void deleteYearById(Long id) {
+        yearService.deleteYearById(id);
     }
 }

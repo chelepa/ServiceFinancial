@@ -21,7 +21,7 @@ public class UserService extends BaseService {
         var entity = modelMapper.map(request, UserEntity.class);
         var newEntity = this.saveUser(entity);
         var response = modelMapper.map(newEntity, UserResponseDTO.class);
-        log.info("UserService.createUser - End - CategoryResponseDTO: [{}]", request);
+        log.info("UserService.createUser - End - CategoryResponseDTO: [{}]", response);
         return response;
     }
 
