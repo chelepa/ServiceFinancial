@@ -1,8 +1,12 @@
 package br.com.ServiceFinancial.service.base;
 
 import br.com.ServiceFinancial.entity.CategoryEntity;
+import br.com.ServiceFinancial.entity.SubCategoryEntity;
+import br.com.ServiceFinancial.entity.UserEntity;
 import br.com.ServiceFinancial.exceptions.CategoryNotFoundException;
 import br.com.ServiceFinancial.repository.CategoryRepository;
+import br.com.ServiceFinancial.repository.SubCategoryRepository;
+import br.com.ServiceFinancial.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +17,12 @@ public class BaseService {
 
     @Autowired
     private CategoryRepository categoryRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private SubCategoryRepository subCategoryRepository;
 
     protected CategoryEntity saveCategory(CategoryEntity entity){
         return categoryRepository.save(entity);
@@ -26,7 +36,35 @@ public class BaseService {
         return categoryRepository.findAll();
     }
 
-    protected void removeCategoryById(CategoryEntity entity) {
+    protected void removeCategory(CategoryEntity entity) {
         categoryRepository.delete(entity);
+    }
+
+    protected UserEntity saveUser(UserEntity entity){
+        return userRepository.save(entity);
+    }
+
+    protected UserEntity searchUserById(Long id){
+        return userRepository.findById(id).orElseThrow(() -> new CategoryNotFoundException(String.format("Category Not Found - Id: [%s] ", id)));
+    }
+
+    protected void removeUser(UserEntity entity) {
+        userRepository.delete(entity);
+    }
+
+    protected SubCategoryEntity saveSubCategory(SubCategoryEntity entity){
+        return subCategoryRepository.save(entity);
+    }
+
+    protected SubCategoryEntity searchSubCategoryRepository(Long id){
+        return subCategoryRepository.findById(id).orElseThrow(() -> new CategoryNotFoundException(String.format("Category Not Found - Id: [%s] ", id)));
+    }
+
+    protected List<SubCategoryEntity> searchAllSubCategory(){
+        return subCategoryRepository.findAll();
+    }
+
+    protected void removeSubCategory(SubCategoryEntity entity) {
+        subCategoryRepository.delete(entity);
     }
 }

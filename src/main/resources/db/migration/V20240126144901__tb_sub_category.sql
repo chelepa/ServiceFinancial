@@ -6,6 +6,4 @@ CREATE TABLE IF NOT EXISTS tb_sub_category (
   INDEX fk_tb_sub_category_tb_category_idx (id_category ASC) VISIBLE,
   CONSTRAINT fk_tb_sub_category_tb_category
     FOREIGN KEY (id_category)
-    REFERENCES tb_category (id_category)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    REFERENCES tb_category (id_category))

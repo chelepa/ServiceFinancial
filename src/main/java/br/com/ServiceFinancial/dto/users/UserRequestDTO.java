@@ -1,4 +1,4 @@
-package br.com.ServiceFinancial.dto.category;
+package br.com.ServiceFinancial.dto.users;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,8 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CategoryRequestDTO {
+public class UserRequestDTO {
 
-    private String name;
-    private Long userId;
+    private Long id;
 }

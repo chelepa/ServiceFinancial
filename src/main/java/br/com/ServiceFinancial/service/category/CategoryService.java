@@ -7,11 +7,7 @@ import br.com.ServiceFinancial.service.base.BaseService;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -25,6 +21,7 @@ public class CategoryService extends BaseService {
     public CategoryResponseDTO createCategory(CategoryRequestDTO request) {
         log.info("CategoryService.createCategory - Start - CategoryRequestDTO: [{}]", request);
         var entity = modelMapper.map(request, CategoryEntity.class);
+            entity.setUser(this.searchUserById(request.getUserId()));
         var newEntity = this.saveCategory(entity);
         var response = modelMapper.map(newEntity, CategoryResponseDTO.class);
         log.info("CategoryService.createCategory - End - CategoryResponseDTO: [{}]", response);
@@ -50,7 +47,7 @@ public class CategoryService extends BaseService {
     public void deleteCategoryById(Long id) {
         log.info("CategoryService.deleteCategoryById - Start - Id: [{}]", id);
         var entity = this.searchCategoryById(id);
-        this.removeCategoryById(entity);
+        this.removeCategory(entity);
         log.info("CategoryService.deleteCategoryById - End - id: [{}] - Deleted", id);
     }
 
@@ -58,6 +55,7 @@ public class CategoryService extends BaseService {
         log.info("CategoryService.updateCategoryById - Start - Id: [{}] CategoryRequestDTO: [{}]", id, request);
         var entity = this.searchCategoryById(id);
         modelMapper.map(request, entity);
+        entity.setId(id);
         var newEntity = this.saveCategory(entity);
         var response = modelMapper.map(newEntity, CategoryResponseDTO.class);
         log.info("CategoryService.updateCategoryById - End - Id: [{}] CategoryRequestDTO: [{}] CategoryResponseDTO: [{}]",  id, request, response);

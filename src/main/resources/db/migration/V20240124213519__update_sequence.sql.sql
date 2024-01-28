@@ -1,6 +1,0 @@
-ALTER TABLE tb_category AUTO_INCREMENT = 1;
-ALTER TABLE tb_sub_category AUTO_INCREMENT = 1;
-ALTER TABLE tb_year AUTO_INCREMENT = 1;
-ALTER TABLE tb_months AUTO_INCREMENT = 1;
-ALTER TABLE tb_months_year AUTO_INCREMENT = 1;
-ALTER TABLE tb_expenses_and_income AUTO_INCREMENT = 1;

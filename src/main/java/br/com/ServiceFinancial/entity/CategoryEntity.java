@@ -8,7 +8,6 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -26,6 +25,10 @@ public class CategoryEntity implements Serializable {
 
     @Column(name = "nm_category")
     private String name;
+
+    @ManyToOne
+    @JoinColumn(name = "id_users")
+    private UserEntity user;
 
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     private List<SubCategoryEntity> listSubCategory = new ArrayList<>();
