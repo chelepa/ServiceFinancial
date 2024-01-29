@@ -21,6 +21,7 @@ public class YearService extends BaseService {
     public YearResponseDTO createYear(YearRequestDTO request) {
         log.info("YearService.createYear - Start - YearDTO: [{}]", request);
         var entity = modelMapper.map(request, YearEntity.class);
+            entity.setMonths(this.searchAllMonths());
         var newEntity = this.saveYear(entity);
         var response = modelMapper.map(newEntity, YearResponseDTO.class);
         log.info("YearService.createYear - End - YearDTOResponseDTO: [{}]", response);
