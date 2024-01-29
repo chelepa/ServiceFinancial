@@ -1,14 +1,8 @@
 package br.com.ServiceFinancial.service.base;
 
-import br.com.ServiceFinancial.entity.CategoryEntity;
-import br.com.ServiceFinancial.entity.SubCategoryEntity;
-import br.com.ServiceFinancial.entity.UserEntity;
-import br.com.ServiceFinancial.entity.YearEntity;
+import br.com.ServiceFinancial.entity.*;
 import br.com.ServiceFinancial.exceptions.CategoryNotFoundException;
-import br.com.ServiceFinancial.repository.CategoryRepository;
-import br.com.ServiceFinancial.repository.SubCategoryRepository;
-import br.com.ServiceFinancial.repository.UserRepository;
-import br.com.ServiceFinancial.repository.YearRepository;
+import br.com.ServiceFinancial.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +22,9 @@ public class BaseService {
 
     @Autowired
     private YearRepository yearRepository;
+
+    @Autowired
+    private MonthsRepository monthsRepository;
 
     protected CategoryEntity saveCategory(CategoryEntity entity){
         return categoryRepository.save(entity);
@@ -87,5 +84,13 @@ public class BaseService {
 
     protected void removeYear(YearEntity entity) {
         yearRepository.delete(entity);
+    }
+
+    protected MonthsEntity searchMonthsById(Long id) {
+        return monthsRepository.findById(id).orElseThrow(() -> new CategoryNotFoundException(String.format("Category Not Found - Id: [%s] ", id)));
+    }
+
+    protected List<MonthsEntity> searchAllMonths() {
+        return monthsRepository.findAll();
     }
 }

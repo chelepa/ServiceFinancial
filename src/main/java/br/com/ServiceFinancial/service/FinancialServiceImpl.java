@@ -2,6 +2,7 @@ package br.com.ServiceFinancial.service;
 
 import br.com.ServiceFinancial.dto.category.CategoryRequestDTO;
 import br.com.ServiceFinancial.dto.category.CategoryResponseDTO;
+import br.com.ServiceFinancial.dto.months.MonthsResponseDTO;
 import br.com.ServiceFinancial.dto.sub_category.SubCategoryRequestDTO;
 import br.com.ServiceFinancial.dto.sub_category.SubCategoryResponseDTO;
 import br.com.ServiceFinancial.dto.users.UserRequestDTO;
@@ -9,6 +10,7 @@ import br.com.ServiceFinancial.dto.users.UserResponseDTO;
 import br.com.ServiceFinancial.dto.year.YearRequestDTO;
 import br.com.ServiceFinancial.dto.year.YearResponseDTO;
 import br.com.ServiceFinancial.service.category.CategoryService;
+import br.com.ServiceFinancial.service.months.MonthsService;
 import br.com.ServiceFinancial.service.sub_category.SubCategoryService;
 import br.com.ServiceFinancial.service.user.UserService;
 import br.com.ServiceFinancial.service.year.YearService;
@@ -31,6 +33,9 @@ public class FinancialServiceImpl implements FinancialService {
 
     @Autowired
     private YearService yearService;
+
+    @Autowired
+    private MonthsService monthsService;
 
     @Override
     public CategoryResponseDTO createCategory(CategoryRequestDTO request) {
@@ -115,5 +120,15 @@ public class FinancialServiceImpl implements FinancialService {
     @Override
     public void deleteYearById(Long id) {
         yearService.deleteYearById(id);
+    }
+
+    @Override
+    public MonthsResponseDTO getMonthsById(Long id) {
+        return monthsService.getMonthsById(id);
+    }
+
+    @Override
+    public List<MonthsResponseDTO> getAllMonths() {
+        return monthsService.getAllMonths();
     }
 }

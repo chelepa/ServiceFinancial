@@ -2,6 +2,7 @@ package br.com.ServiceFinancial.service;
 
 import br.com.ServiceFinancial.dto.category.CategoryRequestDTO;
 import br.com.ServiceFinancial.dto.category.CategoryResponseDTO;
+import br.com.ServiceFinancial.dto.months.MonthsResponseDTO;
 import br.com.ServiceFinancial.dto.sub_category.SubCategoryRequestDTO;
 import br.com.ServiceFinancial.dto.sub_category.SubCategoryResponseDTO;
 import br.com.ServiceFinancial.dto.users.UserRequestDTO;
@@ -33,4 +34,7 @@ public interface FinancialService {
     YearResponseDTO getYearById(Long id);
     List<YearResponseDTO> getAllYear();
     void deleteYearById(Long id);
+
+    MonthsResponseDTO getMonthsById(Long id);
+    List<MonthsResponseDTO> getAllMonths();
 }
