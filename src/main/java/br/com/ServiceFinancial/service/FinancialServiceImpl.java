@@ -2,7 +2,6 @@ package br.com.ServiceFinancial.service;
 
 import br.com.ServiceFinancial.dto.category.CategoryRequestDTO;
 import br.com.ServiceFinancial.dto.category.CategoryResponseDTO;
-import br.com.ServiceFinancial.dto.months.MonthsRequestDTO;
 import br.com.ServiceFinancial.dto.months.MonthsResponseDTO;
 import br.com.ServiceFinancial.dto.sub_category.SubCategoryRequestDTO;
 import br.com.ServiceFinancial.dto.sub_category.SubCategoryResponseDTO;
@@ -136,10 +135,5 @@ public class FinancialServiceImpl implements FinancialService {
     @Override
     public List<MonthsResponseDTO> getAllMonths() {
         return monthsService.getAllMonths();
-    }
-
-    @Override
-    public List<MonthsResponseDTO> createAllMonths(List<MonthsRequestDTO> request) {
-        return monthsService.createAllMonths(request);
     }
 }

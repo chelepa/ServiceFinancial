@@ -1,14 +1,13 @@
 package br.com.ServiceFinancial.controller;
 
-import br.com.ServiceFinancial.dto.months.MonthsRequestDTO;
 import br.com.ServiceFinancial.dto.months.MonthsResponseDTO;
-import br.com.ServiceFinancial.dto.year.YearRequestDTO;
-import br.com.ServiceFinancial.dto.year.YearResponseDTO;
 import br.com.ServiceFinancial.service.FinancialService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -17,11 +16,6 @@ public class MonthsController {
 
     @Autowired
     private FinancialService service;
-
-    @PostMapping(value = "/v1/Months")
-    public ResponseEntity<List<MonthsResponseDTO>> createMonths(@RequestBody List<MonthsRequestDTO> request){
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.createAllMonths(request));
-    }
 
     @GetMapping(value = "/v1/Months/{id}")
     public ResponseEntity<MonthsResponseDTO> getMonthsById(@PathVariable("id") Long id){

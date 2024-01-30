@@ -93,8 +93,4 @@ public class BaseService {
     protected List<MonthsUserEntity> searchAllMonths() {
         return monthsRepository.findAll();
     }
-
-    protected MonthsUserEntity saveMonths(MonthsUserEntity entity) {
-        return monthsRepository.save(entity);
-    }
 }

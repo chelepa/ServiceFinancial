@@ -2,6 +2,7 @@ package br.com.ServiceFinancial.service.year;
 
 import br.com.ServiceFinancial.dto.year.YearRequestDTO;
 import br.com.ServiceFinancial.dto.year.YearResponseDTO;
+import br.com.ServiceFinancial.entity.MonthsUserEntity;
 import br.com.ServiceFinancial.entity.YearUserEntity;
 import br.com.ServiceFinancial.service.base.BaseService;
 import lombok.extern.slf4j.Slf4j;
@@ -24,8 +25,17 @@ public class YearService extends BaseService {
         var entity = modelMapper.map(request, YearUserEntity.class);
             entity.setId(null);
         var newEntity = this.saveYear(entity);
-        var response = modelMapper.map(newEntity, YearResponseDTO.class);
+            newEntity.setMonths(saveMonthsByYearId(newEntity));
+        var update = this.saveYear(newEntity);
+        var response = modelMapper.map(update, YearResponseDTO.class);
         log.info("YearService.createYear - End - YearDTOResponseDTO: [{}]", response);
+        return response;
+    }
+
+    private List<MonthsUserEntity> saveMonthsByYearId(YearUserEntity newEntity) {
+        var months = List.of("janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro");
+        List<MonthsUserEntity> response = new ArrayList<>();
+        months.forEach(item -> response.add(new MonthsUserEntity(null, item, newEntity)));
         return response;
     }
 
