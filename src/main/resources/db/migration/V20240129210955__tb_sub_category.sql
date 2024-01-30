@@ -7,3 +7,5 @@ CREATE TABLE IF NOT EXISTS tb_sub_category (
   CONSTRAINT fk_tb_sub_category_tb_category
     FOREIGN KEY (id_category)
     REFERENCES tb_category (id_category))
+
+AUTO_INCREMENT = 1

@@ -13,5 +13,6 @@ import java.util.List;
 public class YearResponseDTO {
 
     private Long id;
+    private Long year;
     private List<MonthsResponseDTO> months;
 }

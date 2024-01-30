@@ -6,6 +6,6 @@ CREATE TABLE IF NOT EXISTS tb_category (
   INDEX fk_tb_category_tb_user1_idx (id_users ASC) VISIBLE,
   CONSTRAINT fk_tb_category_tb_user1
     FOREIGN KEY (id_users)
-    REFERENCES tb_user (id_users)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    REFERENCES tb_user (id_users))
+
+AUTO_INCREMENT = 1

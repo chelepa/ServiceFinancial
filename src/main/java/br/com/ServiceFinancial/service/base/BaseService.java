@@ -70,27 +70,31 @@ public class BaseService {
         subCategoryRepository.delete(entity);
     }
 
-    protected YearEntity saveYear(YearEntity entity) {
+    protected YearUserEntity saveYear(YearUserEntity entity) {
         return yearRepository.save(entity);
     }
 
-    protected YearEntity searchYearById(Long id) {
+    protected YearUserEntity searchYearById(Long id) {
         return yearRepository.findById(id).orElseThrow(() -> new CategoryNotFoundException(String.format("Category Not Found - Id: [%s] ", id)));
     }
 
-    protected List<YearEntity> searchAllYear() {
+    protected List<YearUserEntity> searchAllYear() {
         return yearRepository.findAll();
     }
 
-    protected void removeYear(YearEntity entity) {
+    protected void removeYear(YearUserEntity entity) {
         yearRepository.delete(entity);
     }
 
-    protected MonthsEntity searchMonthsById(Long id) {
+    protected MonthsUserEntity searchMonthsById(Long id) {
         return monthsRepository.findById(id).orElseThrow(() -> new CategoryNotFoundException(String.format("Category Not Found - Id: [%s] ", id)));
     }
 
-    protected List<MonthsEntity> searchAllMonths() {
+    protected List<MonthsUserEntity> searchAllMonths() {
         return monthsRepository.findAll();
+    }
+
+    protected MonthsUserEntity saveMonths(MonthsUserEntity entity) {
+        return monthsRepository.save(entity);
     }
 }

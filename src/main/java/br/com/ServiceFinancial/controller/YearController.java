@@ -21,6 +21,11 @@ public class YearController {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.createYear(request));
     }
 
+    @PostMapping(value = "/v1/all/Year")
+    public ResponseEntity<List<YearResponseDTO>> createAllYear(@RequestBody List<YearRequestDTO> request){
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.createAllYear(request));
+    }
+
     @GetMapping(value = "/v1/Year/{id}")
     public ResponseEntity<YearResponseDTO> getYearById(@PathVariable("id") Long id){
         return ResponseEntity.status(HttpStatus.OK).body(service.getYearById(id));

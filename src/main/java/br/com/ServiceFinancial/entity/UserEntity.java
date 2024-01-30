@@ -24,4 +24,7 @@ public class UserEntity implements Serializable {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<CategoryEntity> category = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<YearUserEntity> year = new ArrayList<>();
 }

@@ -2,13 +2,14 @@ package br.com.ServiceFinancial.service.year;
 
 import br.com.ServiceFinancial.dto.year.YearRequestDTO;
 import br.com.ServiceFinancial.dto.year.YearResponseDTO;
-import br.com.ServiceFinancial.entity.YearEntity;
+import br.com.ServiceFinancial.entity.YearUserEntity;
 import br.com.ServiceFinancial.service.base.BaseService;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -20,11 +21,19 @@ public class YearService extends BaseService {
 
     public YearResponseDTO createYear(YearRequestDTO request) {
         log.info("YearService.createYear - Start - YearDTO: [{}]", request);
-        var entity = modelMapper.map(request, YearEntity.class);
-            entity.setMonths(this.searchAllMonths());
+        var entity = modelMapper.map(request, YearUserEntity.class);
+            entity.setId(null);
         var newEntity = this.saveYear(entity);
         var response = modelMapper.map(newEntity, YearResponseDTO.class);
         log.info("YearService.createYear - End - YearDTOResponseDTO: [{}]", response);
+        return response;
+    }
+
+    public List<YearResponseDTO> createAllYear(List<YearRequestDTO> request) {
+        log.info("YearService.createAllYear - Start - ListYearRequestDTO: [{}]", request);
+        List<YearResponseDTO> response = new ArrayList<>();
+        request.forEach(item -> response.add(createYear(item)));
+        log.info("YearService.createAllYear - End - YearDTOResponseDTO: [{}]", response);
         return response;
     }
 
