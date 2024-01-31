@@ -26,6 +26,9 @@ public class BaseService {
     @Autowired
     private MonthsRepository monthsRepository;
 
+    @Autowired
+    private ExpensesAndIncomeRepository expensesAndIncomeRepository;
+
     protected CategoryEntity saveCategory(CategoryEntity entity){
         return categoryRepository.save(entity);
     }
@@ -58,7 +61,7 @@ public class BaseService {
         return subCategoryRepository.save(entity);
     }
 
-    protected SubCategoryEntity searchSubCategoryRepository(Long id){
+    protected SubCategoryEntity searchSubCategory(Long id){
         return subCategoryRepository.findById(id).orElseThrow(() -> new CategoryNotFoundException(String.format("Category Not Found - Id: [%s] ", id)));
     }
 
@@ -92,5 +95,17 @@ public class BaseService {
 
     protected List<MonthsUserEntity> searchAllMonths() {
         return monthsRepository.findAll();
+    }
+
+    protected ExpensesAndIncomeEntity saveExpensesAndIncome(ExpensesAndIncomeEntity entity) {
+        return expensesAndIncomeRepository.save(entity);
+    }
+
+    protected ExpensesAndIncomeEntity searchExpensesAndIncome(Long id) {
+        return expensesAndIncomeRepository.findById(id).orElseThrow(() -> new CategoryNotFoundException(String.format("Category Not Found - Id: [%s] ", id)));
+    }
+
+    protected void removeExpensesAndIncome(ExpensesAndIncomeEntity entity) {
+        expensesAndIncomeRepository.delete(entity);
     }
 }

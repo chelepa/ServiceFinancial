@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @Entity
@@ -25,4 +28,7 @@ public class MonthsUserEntity {
     @ManyToOne
     @JoinColumn(name = "id_year_user")
     private YearUserEntity year;
+
+    @OneToMany(mappedBy = "monthsUser", cascade = CascadeType.ALL)
+    private List<ExpensesAndIncomeEntity> expensesAndIncome = new ArrayList<>();
 }

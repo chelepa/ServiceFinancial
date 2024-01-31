@@ -6,6 +6,8 @@ import lombok.Setter;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -27,4 +29,7 @@ public class SubCategoryEntity implements Serializable {
     @ManyToOne
     @JoinColumn(name = "id_category")
     private CategoryEntity category;
+
+    @OneToMany(mappedBy = "subCategory", cascade = CascadeType.ALL)
+    private List<ExpensesAndIncomeEntity> expensesAndIncome = new ArrayList<>();
 }

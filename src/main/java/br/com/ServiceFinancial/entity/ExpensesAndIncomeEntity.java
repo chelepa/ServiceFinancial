@@ -1,0 +1,50 @@
+package br.com.ServiceFinancial.entity;
+
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.io.Serial;
+import java.io.Serializable;
+import java.math.BigDecimal;
+
+@Getter
+@Setter
+@Entity
+@Table(name = "tb_expenses_and_income")
+public class ExpensesAndIncomeEntity implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_expenses_and_income")
+    private Long id;
+
+    @Column(name = "flag_expenses")
+    private boolean expenses;
+
+    @Column(name = "flag_revenues")
+    private boolean revenues;
+
+    @Column(name = "description")
+    private String description;
+
+    @Column(name = "value")
+    private BigDecimal value;
+
+    @Column(name = "flag_paid_out")
+    private boolean paidOut;
+
+    @Column(name = "payment_date")
+    private String paymentDate;
+
+    @ManyToOne
+    @JoinColumn(name = "id_sub_category")
+    private SubCategoryEntity subCategory;
+
+    @ManyToOne
+    @JoinColumn(name = "id_months_user")
+    private MonthsUserEntity monthsUser;
+}

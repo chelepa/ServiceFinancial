@@ -31,7 +31,7 @@ public class SubCategoryService extends BaseService {
 
     public SubCategoryResponseDTO getSubCategoryById(Long id) {
         log.info("SubCategoryService.getSubCategoryById - Start - Id: [{}]", id);
-        var responseEntity = this.searchSubCategoryRepository(id);
+        var responseEntity = this.searchSubCategory(id);
         var response = modelMapper.map(responseEntity, SubCategoryResponseDTO.class);
         log.info("SubCategoryService.getSubCategoryById - End - Id: [{}] SubCategoryResponseDTO: [{}]", id, response);
         return response;
@@ -47,14 +47,14 @@ public class SubCategoryService extends BaseService {
 
     public void deleteSubCategory(Long id) {
         log.info("SubCategoryService.deleteSubCategory - Start - Id: [{}]", id);
-        var entity = this.searchSubCategoryRepository(id);
+        var entity = this.searchSubCategory(id);
         this.removeSubCategory(entity);
         log.info("SubCategoryService.deleteSubCategory - End - id: [{}] - Deleted", id);
     }
 
     public SubCategoryResponseDTO updateSubCategoryById(Long id, SubCategoryRequestDTO request) {
         log.info("SubCategoryService.updateSubCategoryById - Start - Id: [{}] SubCategoryRequestDTO: [{}]", id, request);
-        var entity = this.searchSubCategoryRepository(id);
+        var entity = this.searchSubCategory(id);
         modelMapper.map(request, entity);
         entity.setId(id);
         var newEntity = this.saveSubCategory(entity);

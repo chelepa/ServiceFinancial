@@ -2,6 +2,8 @@ package br.com.ServiceFinancial.service;
 
 import br.com.ServiceFinancial.dto.category.CategoryRequestDTO;
 import br.com.ServiceFinancial.dto.category.CategoryResponseDTO;
+import br.com.ServiceFinancial.dto.expenses_and_income.ExpensesAndIncomeRequestDTO;
+import br.com.ServiceFinancial.dto.expenses_and_income.ExpensesAndIncomeResponseDTO;
 import br.com.ServiceFinancial.dto.months.MonthsResponseDTO;
 import br.com.ServiceFinancial.dto.sub_category.SubCategoryRequestDTO;
 import br.com.ServiceFinancial.dto.sub_category.SubCategoryResponseDTO;
@@ -38,4 +40,9 @@ public interface FinancialService {
 
     MonthsResponseDTO getMonthsById(Long id);
     List<MonthsResponseDTO> getAllMonths();
+
+    ExpensesAndIncomeResponseDTO createExpensesAndIncome(ExpensesAndIncomeRequestDTO request);
+    ExpensesAndIncomeResponseDTO getExpensesAndIncomeById(Long id);
+    ExpensesAndIncomeResponseDTO updateExpensesAndIncomeById(Long id, ExpensesAndIncomeRequestDTO request);
+    void deleteExpensesAndIncome(Long id);
 }
