@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +25,12 @@ public class MonthsUserEntity {
 
     @Column(name = "nm_months")
     private String name;
+
+    @Column(name = "vl_revenues")
+    private BigDecimal valueRevenues;
+
+    @Column(name = "vl_expenses")
+    private BigDecimal valueExpenses;
 
     @ManyToOne
     @JoinColumn(name = "id_year_user")

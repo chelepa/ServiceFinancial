@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS tb_expenses_and_income (
   flag_expenses TINYINT NULL DEFAULT NULL,
   flag_revenues TINYINT NULL DEFAULT NULL,
   description VARCHAR(45) NOT NULL,
-  value DECIMAL(10,0) NOT NULL,
+  value DECIMAL(10,2) NOT NULL,
   flag_paid_out TINYINT NULL DEFAULT NULL,
   payment_date VARCHAR(45) NULL DEFAULT NULL,
   id_sub_category INT NOT NULL,

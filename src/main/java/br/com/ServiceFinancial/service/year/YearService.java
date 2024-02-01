@@ -35,7 +35,7 @@ public class YearService extends BaseService {
     private List<MonthsUserEntity> saveMonthsByYearId(YearUserEntity newEntity) {
         var months = List.of("janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro");
         List<MonthsUserEntity> response = new ArrayList<>();
-        months.forEach(item -> response.add(new MonthsUserEntity(null, item, newEntity, null)));
+        months.forEach(item -> response.add(new MonthsUserEntity(null, item, null, null, newEntity, null)));
         return response;
     }
 
