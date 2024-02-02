@@ -144,6 +144,11 @@ public class FinancialServiceImpl implements FinancialService {
     }
 
     @Override
+    public List<ExpensesAndIncomeResponseDTO> createAllExpensesAndIncome(List<ExpensesAndIncomeRequestDTO> request) {
+        return expensesAndIncomeService.createAllExpensesAndIncome(request);
+    }
+
+    @Override
     public ExpensesAndIncomeResponseDTO createExpensesAndIncome(ExpensesAndIncomeRequestDTO request) {
         return expensesAndIncomeService.createExpensesAndIncome(request);
     }

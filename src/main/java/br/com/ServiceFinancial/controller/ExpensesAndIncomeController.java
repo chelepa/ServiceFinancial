@@ -18,6 +18,11 @@ public class ExpensesAndIncomeController {
     @Autowired
     private FinancialService service;
 
+    @PostMapping(value = "/v1/all/ExpensesAndIncome")
+    public ResponseEntity<List<ExpensesAndIncomeResponseDTO>> createAllExpensesAndIncome(@RequestBody List<ExpensesAndIncomeRequestDTO> request){
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.createAllExpensesAndIncome(request));
+    }
+
     @PostMapping(value = "/v1/ExpensesAndIncome")
     public ResponseEntity<ExpensesAndIncomeResponseDTO> createExpensesAndIncome(@RequestBody ExpensesAndIncomeRequestDTO request){
         return ResponseEntity.status(HttpStatus.CREATED).body(service.createExpensesAndIncome(request));

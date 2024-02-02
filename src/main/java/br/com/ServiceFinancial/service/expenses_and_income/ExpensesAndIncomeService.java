@@ -9,6 +9,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Slf4j
 @Service
 public class ExpensesAndIncomeService extends BaseService {
@@ -16,6 +18,9 @@ public class ExpensesAndIncomeService extends BaseService {
     @Autowired
     private ModelMapper modelMapper;
 
+    public List<ExpensesAndIncomeResponseDTO> createAllExpensesAndIncome(List<ExpensesAndIncomeRequestDTO> request) {
+        return request.stream().map(this::createExpensesAndIncome).toList();
+    }
 
     public ExpensesAndIncomeResponseDTO createExpensesAndIncome(ExpensesAndIncomeRequestDTO request) {
         log.info("ExpensesAndIncomeService.createExpensesAndIncome - Start - ExpensesAndIncomeRequestDTO: [{}]", request);

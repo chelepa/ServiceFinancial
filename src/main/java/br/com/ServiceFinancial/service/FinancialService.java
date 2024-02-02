@@ -41,6 +41,7 @@ public interface FinancialService {
     MonthsResponseDTO getMonthsById(Long id);
     List<MonthsResponseDTO> getAllMonths();
 
+    List<ExpensesAndIncomeResponseDTO> createAllExpensesAndIncome(List<ExpensesAndIncomeRequestDTO> request);
     ExpensesAndIncomeResponseDTO createExpensesAndIncome(ExpensesAndIncomeRequestDTO request);
     ExpensesAndIncomeResponseDTO getExpensesAndIncomeById(Long id);
     ExpensesAndIncomeResponseDTO updateExpensesAndIncomeById(Long id, ExpensesAndIncomeRequestDTO request);
