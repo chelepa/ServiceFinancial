@@ -1,5 +1,6 @@
 package br.com.ServiceFinancial.service.year;
 
+import br.com.ServiceFinancial.constants.Constants;
 import br.com.ServiceFinancial.dto.year.YearRequestDTO;
 import br.com.ServiceFinancial.dto.year.YearResponseDTO;
 import br.com.ServiceFinancial.entity.MonthsUserEntity;
@@ -10,7 +11,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,9 +34,8 @@ public class YearService extends BaseService {
     }
 
     private List<MonthsUserEntity> saveMonthsByYearId(YearUserEntity newEntity) {
-        var months = List.of("janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro");
         List<MonthsUserEntity> response = new ArrayList<>();
-        months.forEach(item -> response.add(new MonthsUserEntity(null, item, BigDecimal.valueOf(0), BigDecimal.valueOf(0), newEntity, null)));
+        Constants.LIST_MONTHS.forEach(item -> response.add(new MonthsUserEntity(item, newEntity)));
         return response;
     }
 

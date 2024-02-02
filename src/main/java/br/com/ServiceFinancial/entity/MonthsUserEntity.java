@@ -13,8 +13,6 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
 @Table(name = "tb_months_user")
 public class MonthsUserEntity {
 
@@ -38,4 +36,12 @@ public class MonthsUserEntity {
 
     @OneToMany(mappedBy = "monthsUser", cascade = CascadeType.ALL)
     private List<ExpensesAndIncomeEntity> expensesAndIncome = new ArrayList<>();
+
+    public MonthsUserEntity(String name, YearUserEntity year){
+        this.setName(name);
+        this.setValueExpenses(BigDecimal.valueOf(0));
+        this.setValueRevenues(BigDecimal.valueOf(0));
+        this.setYear(year);
+        this.setExpensesAndIncome(null);
+    }
 }
