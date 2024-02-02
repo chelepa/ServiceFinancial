@@ -1,7 +1,7 @@
 package br.com.ServiceFinancial.service.base;
 
 import br.com.ServiceFinancial.entity.*;
-import br.com.ServiceFinancial.exceptions.CategoryNotFoundException;
+import br.com.ServiceFinancial.exceptions.*;
 import br.com.ServiceFinancial.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,7 +50,7 @@ public class BaseService {
     }
 
     protected UserEntity searchUserById(Long id){
-        return userRepository.findById(id).orElseThrow(() -> new CategoryNotFoundException(String.format("Category Not Found - Id: [%s] ", id)));
+        return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(String.format("User Not Found - Id: [%s] ", id)));
     }
 
     protected void removeUser(UserEntity entity) {
@@ -62,7 +62,7 @@ public class BaseService {
     }
 
     protected SubCategoryEntity searchSubCategory(Long id){
-        return subCategoryRepository.findById(id).orElseThrow(() -> new CategoryNotFoundException(String.format("Category Not Found - Id: [%s] ", id)));
+        return subCategoryRepository.findById(id).orElseThrow(() -> new SubCategoryNotFoundException(String.format("Sub Category Not Found - Id: [%s] ", id)));
     }
 
     protected List<SubCategoryEntity> searchAllSubCategory(){
@@ -78,7 +78,7 @@ public class BaseService {
     }
 
     protected YearUserEntity searchYearById(Long id) {
-        return yearRepository.findById(id).orElseThrow(() -> new CategoryNotFoundException(String.format("Category Not Found - Id: [%s] ", id)));
+        return yearRepository.findById(id).orElseThrow(() -> new YearNotFoundException(String.format("Year Not Found - Id: [%s] ", id)));
     }
 
     protected List<YearUserEntity> searchAllYear() {
@@ -90,7 +90,7 @@ public class BaseService {
     }
 
     protected MonthsUserEntity searchMonthsById(Long id) {
-        return monthsRepository.findById(id).orElseThrow(() -> new CategoryNotFoundException(String.format("Category Not Found - Id: [%s] ", id)));
+        return monthsRepository.findById(id).orElseThrow(() -> new MonthsNotFoundException(String.format("Months Not Found - Id: [%s] ", id)));
     }
 
     protected List<MonthsUserEntity> searchAllMonths() {
@@ -102,7 +102,7 @@ public class BaseService {
     }
 
     protected ExpensesAndIncomeEntity searchExpensesAndIncome(Long id) {
-        return expensesAndIncomeRepository.findById(id).orElseThrow(() -> new CategoryNotFoundException(String.format("Category Not Found - Id: [%s] ", id)));
+        return expensesAndIncomeRepository.findById(id).orElseThrow(() -> new ExpensesAndIncomeNotFoundException(String.format("ExpensesAndIncome Not Found - Id: [%s] ", id)));
     }
 
     protected void removeExpensesAndIncome(ExpensesAndIncomeEntity entity) {
