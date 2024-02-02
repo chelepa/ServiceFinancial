@@ -1,0 +1,20 @@
+version: "3.7"
+services:
+  app:
+    container_name: ServiceFinancialApplication
+    build:
+      context: .
+    environment:
+      MYSQL_DB: ${MYSQL_DB}
+      MYSQL_HOST: ${MYSQL_HOST}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_PORT: ${MYSQL_PORT}
+      MYSQL_USERNAME: ${MYSQL_USERNAME}
+    ports:
+      - "9004:8082"
+    networks:
+      - chelepa
+
+networks:
+  chelepa:
+    external: true
