@@ -1,5 +1,6 @@
 package br.com.ServiceFinancial.controller;
 
+import br.com.ServiceFinancial.constants.MonthsEnum;
 import br.com.ServiceFinancial.dto.months.MonthsResponseDTO;
 import br.com.ServiceFinancial.service.FinancialService;
 import com.itextpdf.text.DocumentException;
@@ -31,7 +32,7 @@ public class MonthsController {
     }
 
     @GetMapping(value = "/v1/Months/report/{userId}/{year}/{months}")
-    public void getReport(@PathVariable("userId") Long userId, @PathVariable("year") Long year, @PathVariable("months") String months, HttpServletResponse response) throws DocumentException, IOException {
-        service.createReportMonths(userId, year, months, response);
+    public void getReport(@PathVariable("userId") Long userId, @PathVariable("year") Long year, @PathVariable("months") MonthsEnum months, HttpServletResponse response) throws DocumentException, IOException {
+        service.createReportMonths(userId, year, months.getMessage(), response);
     }
 }
