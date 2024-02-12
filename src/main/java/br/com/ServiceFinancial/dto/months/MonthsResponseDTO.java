@@ -1,7 +1,6 @@
 package br.com.ServiceFinancial.dto.months;
 
 import br.com.ServiceFinancial.dto.expenses_and_income.ExpensesAndIncomeResponseDTO;
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

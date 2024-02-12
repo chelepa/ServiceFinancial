@@ -2,8 +2,6 @@ package br.com.ServiceFinancial.controller;
 
 import br.com.ServiceFinancial.dto.expenses_and_income.ExpensesAndIncomeRequestDTO;
 import br.com.ServiceFinancial.dto.expenses_and_income.ExpensesAndIncomeResponseDTO;
-import br.com.ServiceFinancial.dto.sub_category.SubCategoryRequestDTO;
-import br.com.ServiceFinancial.dto.sub_category.SubCategoryResponseDTO;
 import br.com.ServiceFinancial.service.FinancialService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

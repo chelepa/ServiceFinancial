@@ -14,12 +14,16 @@ import br.com.ServiceFinancial.dto.year.YearResponseDTO;
 import br.com.ServiceFinancial.service.category.CategoryService;
 import br.com.ServiceFinancial.service.expenses_and_income.ExpensesAndIncomeService;
 import br.com.ServiceFinancial.service.months.MonthsService;
+import br.com.ServiceFinancial.service.report.ReportService;
 import br.com.ServiceFinancial.service.sub_category.SubCategoryService;
 import br.com.ServiceFinancial.service.user.UserService;
 import br.com.ServiceFinancial.service.year.YearService;
+import com.itextpdf.text.DocumentException;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -42,6 +46,9 @@ public class FinancialServiceImpl implements FinancialService {
 
     @Autowired
     private ExpensesAndIncomeService expensesAndIncomeService;
+
+    @Autowired
+    private ReportService reportService;
 
     @Override
     public CategoryResponseDTO createCategory(CategoryRequestDTO request) {
@@ -129,6 +136,11 @@ public class FinancialServiceImpl implements FinancialService {
     }
 
     @Override
+    public void createReportYear(Long userId, Long year, HttpServletResponse response) throws DocumentException, IOException {
+        reportService.createReportYear(userId, year, response);
+    }
+
+    @Override
     public void deleteYearById(Long id) {
         yearService.deleteYearById(id);
     }
@@ -141,6 +153,11 @@ public class FinancialServiceImpl implements FinancialService {
     @Override
     public List<MonthsResponseDTO> getAllMonths() {
         return monthsService.getAllMonths();
+    }
+
+    @Override
+    public void createReportMonths(Long userId, Long year, String months, HttpServletResponse response) throws DocumentException, IOException {
+        reportService.createReportMonths(userId, year, months, response);
     }
 
     @Override

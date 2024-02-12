@@ -85,6 +85,10 @@ public class BaseService {
         return yearRepository.findAll();
     }
 
+    protected YearUserEntity searchYearByYearAndUserId(Long year, Long userId) {
+        return yearRepository.findByYearAndUser_id(year, userId).orElseThrow(() -> new YearNotFoundException(String.format("Year Not Found - Year: [%s], UserId: [%s] ", year, userId)));
+    }
+
     protected void removeYear(YearUserEntity entity) {
         yearRepository.delete(entity);
     }
@@ -95,6 +99,10 @@ public class BaseService {
 
     protected List<MonthsUserEntity> searchAllMonths() {
         return monthsRepository.findAll();
+    }
+
+    protected MonthsUserEntity searchMonthsByNameAndYearAndUserId(String name, Long year, Long userId) {
+        return monthsRepository.findByNameAndYear_yearAndYear_user_id(name, year, userId).orElseThrow(() -> new MonthsNotFoundException(String.format("Months Not Found - Name: [%s], Year: [%s], UserId: [%s] ", name, year, userId)));
     }
 
     protected ExpensesAndIncomeEntity saveExpensesAndIncome(ExpensesAndIncomeEntity entity) {
