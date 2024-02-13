@@ -1,5 +1,7 @@
 FROM openjdk:17-jdk-alpine as build
 
+ENV TZ="America/Sao_Paulo"
+
 WORKDIR /app
 
 COPY mvnw .
