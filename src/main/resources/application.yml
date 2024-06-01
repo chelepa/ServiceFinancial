@@ -1,1 +1,19 @@
+server:
+  port: 8082
 
+spring:
+  application:
+    name: ServiceFinancial
+  flyway:
+    enabled: true
+    password: ${MYSQL_PASSWORD}
+    user: ${MYSQL_USERNAME}
+    url: jdbc:mysql://${MYSQL_HOST}:${MYSQL_PORT}/
+    schemas: ${MYSQL_DB}
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST}:${MYSQL_PORT}/${MYSQL_DB}?createDatabaseIfNotExist=TRUE&useTimezone=true&serverTimezone=America/Sao_Paulo
+    username: ${MYSQL_USERNAME}
+    password: ${MYSQL_PASSWORD}
+#  jpa:
+#    hibernate:
+#      ddl-auto: update

@@ -1,0 +1,7 @@
+ALTER TABLE tb_category AUTO_INCREMENT = 1;
+ALTER TABLE tb_months AUTO_INCREMENT = 1;
+ALTER TABLE tb_sub_category AUTO_INCREMENT = 1;
+ALTER TABLE tb_account AUTO_INCREMENT = 1;
+ALTER TABLE tb_account_bank AUTO_INCREMENT = 1;
+ALTER TABLE tb_operation_type AUTO_INCREMENT = 1;
+ALTER TABLE tb_operation_details AUTO_INCREMENT = 1;

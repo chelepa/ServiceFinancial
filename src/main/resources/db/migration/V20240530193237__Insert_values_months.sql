@@ -1,0 +1,12 @@
+INSERT INTO tb_months (nm_months) VALUES ('Janeiro');
+INSERT INTO tb_months (nm_months) VALUES ('Fevereiro');
+INSERT INTO tb_months (nm_months) VALUES ('Março');
+INSERT INTO tb_months (nm_months) VALUES ('Abril');
+INSERT INTO tb_months (nm_months) VALUES ('Maio');
+INSERT INTO tb_months (nm_months) VALUES ('Junho');
+INSERT INTO tb_months (nm_months) VALUES ('Julho');
+INSERT INTO tb_months (nm_months) VALUES ('Agosto');
+INSERT INTO tb_months (nm_months) VALUES ('Setembro');
+INSERT INTO tb_months (nm_months) VALUES ('Outubro');
+INSERT INTO tb_months (nm_months) VALUES ('Novembro');
+INSERT INTO tb_months (nm_months) VALUES ('Dezembro');
