@@ -3,14 +3,11 @@ package br.com.ServiceFinancial.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @Setter
@@ -36,11 +33,7 @@ public class OperationDetailsEntity implements Serializable {
     @JoinColumn(name="id_operation_type")
     private OperationTypeEntity operationType;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
-    @JoinTable(
-            name = "tb_account_operation_details",
-            joinColumns = {@JoinColumn(name = "id_operation_detail", referencedColumnName = "id_operation_detail")},
-            inverseJoinColumns = {@JoinColumn(name = "id_account_bank", referencedColumnName = "id_account_bank")}
-    )
-    private List<AccountBankEntity> accountBank = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name="id_account_bank")
+    private AccountBankEntity accountBank;
 }

@@ -1,6 +1,5 @@
 package br.com.ServiceFinancial.dto.operation_details;
 
-import br.com.ServiceFinancial.dto.operation_type.OperationTypeResponseDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,6 +14,7 @@ public class OperationDetailsRequestDTO {
 
     private ZonedDateTime operationDetailDate;
     private BigDecimal operationDetailDateValue;
-    private OperationTypeResponseDTO operationType;
+    private Long accountBankId;
+    private Long operationTypeId;
 
 }

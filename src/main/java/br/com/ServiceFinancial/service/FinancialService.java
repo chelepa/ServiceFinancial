@@ -1,9 +1,9 @@
 package br.com.ServiceFinancial.service;
 
-import br.com.ServiceFinancial.dto.account_bank.AccountBankDTO;
 import br.com.ServiceFinancial.dto.account_bank.AccountBankRequestDTO;
 import br.com.ServiceFinancial.dto.account_bank.AccountBankResponseDTO;
-import br.com.ServiceFinancial.dto.account_bank.AccountBankUpdateDTO;
+import br.com.ServiceFinancial.dto.operation_details.OperationDetailsRequestDTO;
+import br.com.ServiceFinancial.dto.operation_details.OperationDetailsResponseDTO;
 import br.com.ServiceFinancial.dto.operation_type.OperationTypeResponseDTO;
 import br.com.ServiceFinancial.dto.user.UserRequestDTO;
 import br.com.ServiceFinancial.dto.user.UserResponseDTO;
@@ -20,8 +20,14 @@ public interface FinancialService {
     List<OperationTypeResponseDTO> getAllOperationType();
 
     AccountBankResponseDTO createAccountBank(AccountBankRequestDTO request);
-    List<AccountBankDTO> getAccountBankByUserId(Long userId);
-    AccountBankDTO getAccountBankByUserIdAndId(Long userId, Long id);
-    AccountBankDTO updateAccountBankByUserIdAndId(Long userId, Long id, AccountBankUpdateDTO request);
+    List<AccountBankResponseDTO> getAccountBankByUserId(Long userId);
+    AccountBankResponseDTO getAccountBankByUserIdAndId(Long userId, Long id);
+    AccountBankResponseDTO updateAccountBankByUserIdAndId(Long userId, Long id, AccountBankRequestDTO request);
     void deleteAccountBankByUserIdAndId(Long userId, Long id);
+
+    OperationDetailsResponseDTO createOperationDetails(OperationDetailsRequestDTO request);
+    List<OperationDetailsResponseDTO> getOperationDetailsByUserIdAndAccountId(Long userId, Long accountBankId);
+    List<OperationDetailsResponseDTO> getOperationDetailsByUserIdAndAccountIdAndOperationTypeId(Long userId, Long accountBankId, Long operationTypeId);
+    OperationDetailsResponseDTO updateOperationDetailsByUserIdAndAccountId(Long userId, Long accountBankId, Long operationDetailsId, OperationDetailsRequestDTO request);
+    void deleteOperationDetailsByUserIdAndAccountId(Long userId, Long accountBankId, Long operationDetailsId);
 }

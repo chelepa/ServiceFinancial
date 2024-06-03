@@ -1,19 +1,18 @@
 package br.com.ServiceFinancial.dto.account_bank;
 
-import br.com.ServiceFinancial.dto.operation_details.OperationDetailsRequestDTO;
-import br.com.ServiceFinancial.dto.user.UserRequestDTO;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.math.BigDecimal;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class AccountBankRequestDTO {
     private String accountBankDescription;
-    private UserRequestDTO user;
-    private List<OperationDetailsRequestDTO> operationDetails = new ArrayList<>();
+    private BigDecimal accountBankValue;
+    private Long userId;
 }

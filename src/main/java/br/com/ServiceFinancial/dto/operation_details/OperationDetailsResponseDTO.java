@@ -12,6 +12,7 @@ import java.time.ZonedDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OperationDetailsResponseDTO {
+
     private Long operationDetailId;
     private ZonedDateTime operationDetailDate;
     private BigDecimal operationDetailDateValue;

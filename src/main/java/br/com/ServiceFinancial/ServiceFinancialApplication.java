@@ -1,5 +1,6 @@
 package br.com.ServiceFinancial;
 
+import br.com.ServiceFinancial.converter.UserEntityToUserResponseDTOConverter;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,6 +15,8 @@ public class ServiceFinancialApplication {
 
 	@Bean
 	public ModelMapper modelMapper() {
-		return new ModelMapper();
+		ModelMapper modelMapper = new ModelMapper();
+		modelMapper.addConverter(new UserEntityToUserResponseDTOConverter());
+		return modelMapper;
 	}
 }

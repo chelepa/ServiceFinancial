@@ -1,11 +1,7 @@
 package br.com.ServiceFinancial.controller;
 
-import br.com.ServiceFinancial.dto.account_bank.AccountBankDTO;
 import br.com.ServiceFinancial.dto.account_bank.AccountBankRequestDTO;
 import br.com.ServiceFinancial.dto.account_bank.AccountBankResponseDTO;
-import br.com.ServiceFinancial.dto.account_bank.AccountBankUpdateDTO;
-import br.com.ServiceFinancial.dto.user.UserRequestDTO;
-import br.com.ServiceFinancial.dto.user.UserResponseDTO;
 import br.com.ServiceFinancial.service.FinancialService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -26,17 +22,17 @@ public class AccountBankController {
     }
 
     @GetMapping(value = "/v1/account/bank/{userId}")
-    public ResponseEntity<List<AccountBankDTO>> getAccountBankByUserId(@PathVariable("userId") Long userId){
+    public ResponseEntity<List<AccountBankResponseDTO>> getAccountBankByUserId(@PathVariable("userId") Long userId){
         return ResponseEntity.status(HttpStatus.OK).body(financialService.getAccountBankByUserId(userId));
     }
 
     @GetMapping(value = "/v1/account/bank/{userId}/{id}")
-    public ResponseEntity<AccountBankDTO> getAccountBankByUserIdAndId(@PathVariable("userId") Long userId, @PathVariable("id") Long id){
+    public ResponseEntity<AccountBankResponseDTO> getAccountBankByUserIdAndId(@PathVariable("userId") Long userId, @PathVariable("id") Long id){
         return ResponseEntity.status(HttpStatus.OK).body(financialService.getAccountBankByUserIdAndId(userId, id));
     }
 
     @PutMapping(value = "/v1/account/bank/{userId}/{id}")
-    public ResponseEntity<AccountBankDTO> updateAccountBankByUserIdAndId(@PathVariable("userId") Long userId, @PathVariable("id") Long id, @RequestBody AccountBankUpdateDTO request){
+    public ResponseEntity<AccountBankResponseDTO> updateAccountBankByUserIdAndId(@PathVariable("userId") Long userId, @PathVariable("id") Long id, @RequestBody AccountBankRequestDTO request){
         return ResponseEntity.status(HttpStatus.OK).body(financialService.updateAccountBankByUserIdAndId(userId, id, request));
     }
 

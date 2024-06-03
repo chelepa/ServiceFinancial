@@ -1,10 +1,7 @@
 package br.com.ServiceFinancial.service.operation;
 
-import br.com.ServiceFinancial.dto.account_bank.AccountBankDTO;
 import br.com.ServiceFinancial.dto.account_bank.AccountBankRequestDTO;
 import br.com.ServiceFinancial.dto.account_bank.AccountBankResponseDTO;
-import br.com.ServiceFinancial.dto.account_bank.AccountBankUpdateDTO;
-import br.com.ServiceFinancial.dto.operation_type.OperationTypeResponseDTO;
 import br.com.ServiceFinancial.entity.AccountBankEntity;
 import br.com.ServiceFinancial.service.base.BaseService;
 import lombok.extern.slf4j.Slf4j;
@@ -30,28 +27,28 @@ public class AccountBankService extends BaseService {
         return response;
     }
 
-    public List<AccountBankDTO> getAccountBankByUserId(Long userId) {
+    public List<AccountBankResponseDTO> getAccountBankByUserId(Long userId) {
         log.info("AccountBankService.getAccountBankByUserId - Start - UserId: [{}] ", userId);
         var entity = this.getAllAccountBankByUserId(userId);
-        var responseList = entity.stream().map(item -> modelMapper.map(item, AccountBankDTO.class)).toList();
+        var responseList = entity.stream().map(item -> modelMapper.map(item, AccountBankResponseDTO.class)).toList();
         log.info("AccountBankService.getAccountBankByUserId - End - UserId: [{}], ListResponse: [{}] ", userId, responseList);
         return responseList;
     }
 
-    public AccountBankDTO getAccountBankByUserIdAndId(Long userId, Long id) {
+    public AccountBankResponseDTO getAccountBankByUserIdAndId(Long userId, Long id) {
         log.info("AccountBankService.getAccountBankByUserIdAndId - Start - UserId: [{}], Id: [{}] ", userId, id);
         var entity = this.getAllAccountBankByUserIdAndId(id, userId);
-        var response = modelMapper.map(entity, AccountBankDTO.class);
+        var response = modelMapper.map(entity, AccountBankResponseDTO.class);
         log.info("AccountBankService.getAccountBankByUserIdAndId - End - UserId: [{}], Id: [{}], Response: [{}] ", userId, id, response);
         return response;
     }
 
-    public AccountBankDTO updateAccountBankByUserIdAndId(Long userId, Long id, AccountBankUpdateDTO request) {
+    public AccountBankResponseDTO updateAccountBankByUserIdAndId(Long userId, Long id, AccountBankRequestDTO request) {
         log.info("AccountBankService.updateAccountBankByUserIdAndId - Start - UserId: [{}], Id: [{}], AccountBankUpdateDTO: [{}] ", userId, id, request);
         var entity = this.getAllAccountBankByUserIdAndId(id, userId);
-        modelMapper.map(request, entity);
+            entity.setAccountBankDescription(request.getAccountBankDescription());
         this.createAccountBankDB(entity);
-        var response = modelMapper.map(entity, AccountBankDTO.class);
+        var response = modelMapper.map(entity, AccountBankResponseDTO.class);
         log.info("AccountBankService.updateAccountBankByUserIdAndId - End - UserId: [{}], Id: [{}], AccountBankUpdateDTO: [{}], Response: [{}] ", userId, id, request, response);
         return response;
     }
