@@ -7,10 +7,13 @@ import br.com.ServiceFinancial.dto.operation_details.OperationDetailsResponseDTO
 import br.com.ServiceFinancial.dto.operation_type.OperationTypeResponseDTO;
 import br.com.ServiceFinancial.dto.user.UserRequestDTO;
 import br.com.ServiceFinancial.dto.user.UserResponseDTO;
+import br.com.ServiceFinancial.dto.year.YearRequestDTO;
+import br.com.ServiceFinancial.dto.year.YearResponseDTO;
 import br.com.ServiceFinancial.service.operation.AccountBankService;
 import br.com.ServiceFinancial.service.operation.OperationDetailsService;
 import br.com.ServiceFinancial.service.operation.OperationTypeService;
 import br.com.ServiceFinancial.service.user.UserService;
+import br.com.ServiceFinancial.service.year.YearService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +27,7 @@ public class FinancialServiceImpl implements FinancialService {
     private final OperationTypeService operationTypeService;
     private final AccountBankService accountBankService;
     private final OperationDetailsService operationDetailsService;
+    private final YearService yearService;
 
     @Override
     public UserResponseDTO getUserById(Long userId) {
@@ -98,5 +102,10 @@ public class FinancialServiceImpl implements FinancialService {
     @Override
     public void deleteOperationDetailsByUserIdAndAccountId(Long userId, Long accountBankId, Long operationDetailsId) {
         operationDetailsService.deleteOperationDetailsByUserIdAndAccountId(userId, accountBankId, operationDetailsId);
+    }
+
+    @Override
+    public YearResponseDTO createYear(YearRequestDTO request) {
+        return yearService.createYear(request);
     }
 }

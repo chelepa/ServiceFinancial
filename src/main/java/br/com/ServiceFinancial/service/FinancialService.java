@@ -7,6 +7,8 @@ import br.com.ServiceFinancial.dto.operation_details.OperationDetailsResponseDTO
 import br.com.ServiceFinancial.dto.operation_type.OperationTypeResponseDTO;
 import br.com.ServiceFinancial.dto.user.UserRequestDTO;
 import br.com.ServiceFinancial.dto.user.UserResponseDTO;
+import br.com.ServiceFinancial.dto.year.YearRequestDTO;
+import br.com.ServiceFinancial.dto.year.YearResponseDTO;
 
 import java.util.List;
 
@@ -30,4 +32,6 @@ public interface FinancialService {
     List<OperationDetailsResponseDTO> getOperationDetailsByUserIdAndAccountIdAndOperationTypeId(Long userId, Long accountBankId, Long operationTypeId);
     OperationDetailsResponseDTO updateOperationDetailsByUserIdAndAccountId(Long userId, Long accountBankId, Long operationDetailsId, OperationDetailsRequestDTO request);
     void deleteOperationDetailsByUserIdAndAccountId(Long userId, Long accountBankId, Long operationDetailsId);
+
+    YearResponseDTO createYear(YearRequestDTO request);
 }
