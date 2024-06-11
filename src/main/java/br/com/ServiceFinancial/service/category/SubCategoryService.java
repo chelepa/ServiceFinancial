@@ -52,4 +52,12 @@ public class SubCategoryService extends BaseService {
         this.deleteSubCategory(responseEntity);
         log.info("SubCategoryService.deleteSubCategoryByUserId - End - UserId: [{}], CategoryId: [{}], subCategoryId: [{}], Status: [DELETED]", userId, categoryId, subCategoryId);
     }
+
+    public SubCategoryResponseDTO getSubCategoryByUserIdAndCategoryIdAndSubCategoryId(Long userId, Long categoryId, Long subCategoryId) {
+        log.info("SubCategoryService.getSubCategoryByUserIdAndCategoryIdAndSubCategoryId - Start - UserId: [{}], CategoryId: [{}], subCategoryId: [{}]", userId, categoryId, subCategoryId);
+        var responseEntity = this.getAllSubCategoryByUserIdAndCategoryIdAndSubCategoryId(userId, categoryId, subCategoryId);
+        var response = modelMapper.map(responseEntity, SubCategoryResponseDTO.class);
+        log.info("SubCategoryService.getSubCategoryByUserIdAndCategoryIdAndSubCategoryId - End - UserId: [{}], CategoryId: [{}], subCategoryId: [{}], SubCategoryResponseDTO: [{}]", userId, categoryId, subCategoryId, response);
+        return response;
+    }
 }

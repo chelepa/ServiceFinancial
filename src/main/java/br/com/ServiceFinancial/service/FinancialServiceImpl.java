@@ -123,6 +123,11 @@ public class FinancialServiceImpl implements FinancialService {
     }
 
     @Override
+    public CategoryResponseDTO getAllCategoryByUserIdAndCategoryId(Long userId, Long categoryId) {
+        return categoryService.getAllCategoryByUserIdAndCategoryId(userId, categoryId);
+    }
+
+    @Override
     public List<CategoryResponseDTO> getAllCategoryByUserId(Long userId) {
         return categoryService.getAllCategoryByUserId(userId);
     }
@@ -133,8 +138,8 @@ public class FinancialServiceImpl implements FinancialService {
     }
 
     @Override
-    public CategoryResponseDTO updateCategoryByUserIdy(Long userId, Long categoryId, CategoryRequestDTO request) {
-        return categoryService.updateCategoryByUserIdy(userId, categoryId, request);
+    public CategoryResponseDTO updateCategoryByUserId(Long userId, Long categoryId, CategoryRequestDTO request) {
+        return categoryService.updateCategoryByUserId(userId, categoryId, request);
     }
 
     @Override
@@ -150,6 +155,11 @@ public class FinancialServiceImpl implements FinancialService {
     @Override
     public SubCategoryResponseDTO updateSubCategoryByUserId(Long userId, Long categoryId, Long subCategoryId, SubCategoryRequestDTO request) {
         return subCategoryService.updateSubCategoryByUserId(userId, categoryId, subCategoryId, request);
+    }
+
+    @Override
+    public SubCategoryResponseDTO GetSubCategoryByUserIdAndCategoryIdAndSubCategoryId(Long userId, Long categoryId, Long subCategoryId) {
+        return subCategoryService.getSubCategoryByUserIdAndCategoryIdAndSubCategoryId(userId, categoryId, subCategoryId);
     }
 
     @Override

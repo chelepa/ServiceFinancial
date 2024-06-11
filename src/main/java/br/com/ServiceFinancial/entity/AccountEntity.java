@@ -45,7 +45,13 @@ public class AccountEntity implements Serializable {
 
     @ManyToOne
     @JoinColumn(name="id_users")
-    @JoinColumn(name="id_year")
+    private UserEntity user;
+
+    @ManyToOne
     @JoinColumn(name="id_months")
-    private UserAccountEntity userAccount;
+    private MonthsEntity months;
+
+    @ManyToOne
+    @JoinColumn(name="id_year")
+    private YearEntity year;
 }

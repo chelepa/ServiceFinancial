@@ -40,12 +40,14 @@ public interface FinancialService {
     YearResponseDTO createYear(YearRequestDTO request);
 
     CategoryResponseDTO createCategory(CategoryRequestDTO request);
-    CategoryResponseDTO updateCategoryByUserIdy(Long userId, Long categoryId, CategoryRequestDTO request);
+    CategoryResponseDTO getAllCategoryByUserIdAndCategoryId(Long userId, Long categoryId);
+    CategoryResponseDTO updateCategoryByUserId(Long userId, Long categoryId, CategoryRequestDTO request);
     List<CategoryResponseDTO> getAllCategoryByUserId(Long userId);
     void deleteCategoryByUserId(Long userId, Long categoryId);
 
     SubCategoryResponseDTO createSubCategory(SubCategoryRequestDTO request);
     List<SubCategoryResponseDTO> getAllSubCategoryByUserId(Long userId, Long categoryId);
     SubCategoryResponseDTO updateSubCategoryByUserId(Long userId, Long categoryId, Long subCategoryId, SubCategoryRequestDTO request);
+    SubCategoryResponseDTO GetSubCategoryByUserIdAndCategoryIdAndSubCategoryId(Long userId, Long categoryId, Long subCategoryId);
     void deleteSubCategoryByUserId(Long userId, Long categoryId, Long subCategoryId);
 }

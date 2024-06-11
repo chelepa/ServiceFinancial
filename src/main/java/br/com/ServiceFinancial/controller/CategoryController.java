@@ -26,11 +26,16 @@ public class CategoryController {
         return ResponseEntity.status(HttpStatus.OK).body(financialService.getAllCategoryByUserId(userId));
     }
 
+    @GetMapping(value = "/v1/category/{userId}/{categoryId}")
+    public ResponseEntity<CategoryResponseDTO> getAllCategoryByUserIdAndCategoryId(@PathVariable("userId") Long userId, @PathVariable("categoryId") Long categoryId) {
+        return ResponseEntity.status(HttpStatus.OK).body(financialService.getAllCategoryByUserIdAndCategoryId(userId, categoryId));
+    }
+
     @PutMapping(value = "/v1/category/{userId}/{categoryId}")
     public ResponseEntity<CategoryResponseDTO> updateCategoryByUserId(@PathVariable("userId") Long userId,
                                                                       @PathVariable("categoryId") Long categoryId,
                                                                       @RequestBody CategoryRequestDTO request) {
-        return ResponseEntity.status(HttpStatus.OK).body(financialService.updateCategoryByUserIdy(userId, categoryId, request));
+        return ResponseEntity.status(HttpStatus.OK).body(financialService.updateCategoryByUserId(userId, categoryId, request));
     }
 
     @DeleteMapping(value = "/v1/category/{userId}/{categoryId}")

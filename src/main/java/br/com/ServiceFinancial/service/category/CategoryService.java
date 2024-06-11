@@ -38,7 +38,7 @@ public class CategoryService extends BaseService {
         return responseList;
     }
 
-    public CategoryResponseDTO updateCategoryByUserIdy(Long userId, Long categoryId, CategoryRequestDTO request) {
+    public CategoryResponseDTO updateCategoryByUserId(Long userId, Long categoryId, CategoryRequestDTO request) {
         log.info("CategoryService.UpdateAllCategoryByUserIdy - Start - UserId: [{}], CategoryId: [{}], CategoryRequestDTO: [{}]", userId, categoryId, request);
         var entityResponse = this.searchCategoryByUserIdAndCategoryId(userId, categoryId);
             entityResponse.setCategoryName(request.getCategoryName());
@@ -53,5 +53,13 @@ public class CategoryService extends BaseService {
         var entityResponse = this.searchCategoryByUserIdAndCategoryId(userId, categoryId);
         this.deleteCategory(entityResponse);
         log.info("CategoryService.DeleteCategoryByUserId - End - UserId: [{}], CategoryId: [{}], Status: [DELETED]", userId, categoryId);
+    }
+
+    public CategoryResponseDTO getAllCategoryByUserIdAndCategoryId(Long userId, Long categoryId) {
+        log.info("CategoryService.GetAllCategoryByUserIdAndCategoryId - Start - UserId: [{}], CategoryId: [{}]", userId, categoryId);
+        var entity = this.searchCategoryByUserIdAndCategoryId(userId, categoryId);
+        var response = modelMapper.map(entity, CategoryResponseDTO.class);
+        log.info("CategoryService.GetAllCategoryByUserIdAndCategoryId - End - UserId: [{}], CategoryId: [{}], CategoryResponseDTO: [{}]", userId, categoryId, response);
+        return response;
     }
 }

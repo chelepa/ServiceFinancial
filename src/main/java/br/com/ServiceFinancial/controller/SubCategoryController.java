@@ -27,6 +27,13 @@ public class SubCategoryController {
         return ResponseEntity.status(HttpStatus.OK).body(financialService.getAllSubCategoryByUserId(userId, categoryId));
     }
 
+    @GetMapping(value = "/v1/sub/category/{userId}/{categoryId}/{subCategoryId}")
+    public ResponseEntity<SubCategoryResponseDTO> getSubCategoryByUserIdAndCategoryIdAndSubCategoryId(@PathVariable("userId") Long userId,
+                                                                                                      @PathVariable("categoryId") Long categoryId,
+                                                                                                      @PathVariable("subCategoryId") Long subCategoryId) {
+        return ResponseEntity.status(HttpStatus.OK).body(financialService.GetSubCategoryByUserIdAndCategoryIdAndSubCategoryId(userId, categoryId, subCategoryId));
+    }
+
     @PutMapping(value = "/v1/sub/category/{userId}/{categoryId}/{subCategoryId}")
     public ResponseEntity<SubCategoryResponseDTO> updateSubCategoryByUserId(@PathVariable("userId") Long userId,
                                                                             @PathVariable("categoryId") Long categoryId,

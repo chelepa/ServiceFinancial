@@ -29,6 +29,6 @@ public class UserEntity implements Serializable {
     private List<CategoryEntity> category = new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
-    private List<UserAccountEntity> account = new ArrayList<>();
+    private List<AccountEntity> account = new ArrayList<>();
 
 }
