@@ -1,12 +1,12 @@
 package br.com.ServiceFinancial.converter;
 
 import br.com.ServiceFinancial.dto.account_bank.AccountBankResponseDTO;
+import br.com.ServiceFinancial.dto.category.CategoryResponseDTO;
 import br.com.ServiceFinancial.dto.operation_details.OperationDetailsResponseDTO;
 import br.com.ServiceFinancial.dto.operation_type.OperationTypeResponseDTO;
+import br.com.ServiceFinancial.dto.sub_category.SubCategoryResponseDTO;
 import br.com.ServiceFinancial.dto.user.UserResponseDTO;
-import br.com.ServiceFinancial.entity.AccountBankEntity;
-import br.com.ServiceFinancial.entity.OperationDetailsEntity;
-import br.com.ServiceFinancial.entity.UserEntity;
+import br.com.ServiceFinancial.entity.*;
 import org.modelmapper.Converter;
 import org.modelmapper.spi.MappingContext;
 
@@ -21,7 +21,31 @@ public class UserEntityToUserResponseDTOConverter implements Converter<UserEntit
         UserResponseDTO destination = Objects.isNull(context.getDestination()) ? new UserResponseDTO() : context.getDestination();
         destination.setUserId(context.getSource().getUserId());
         destination.setAccountBank(convertAccountBank(context.getSource().getAccountBank()));
+        destination.setCategory(convertCategory(context.getSource().getCategory()));
         return destination;
+    }
+
+    private List<CategoryResponseDTO> convertCategory(List<CategoryEntity> category) {
+        List<CategoryResponseDTO> response = new ArrayList<>();
+        category.forEach(item -> {
+            var request = new CategoryResponseDTO();
+                request.setCategoryId(item.getCategoryId());
+                request.setCategoryName(item.getCategoryName());
+                request.setSubCategory(convertSubCategory(item.getSubCategory()));
+            response.add(request);
+        });
+        return response;
+    }
+
+    private List<SubCategoryResponseDTO> convertSubCategory(List<SubCategoryEntity> subCategory) {
+        List<SubCategoryResponseDTO> response = new ArrayList<>();
+        subCategory.forEach(item -> {
+            var request = new SubCategoryResponseDTO();
+                request.setSubCategoryId(item.getSubCategoryId());
+                request.setSubCategoryName(item.getSubCategoryName());
+            response.add(request);
+        });
+        return response;
     }
 
     private List<AccountBankResponseDTO> convertAccountBank(List<AccountBankEntity> accountBank) {

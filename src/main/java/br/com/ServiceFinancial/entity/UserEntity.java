@@ -25,4 +25,10 @@ public class UserEntity implements Serializable {
     @OneToMany(mappedBy = "user")
     private List<AccountBankEntity> accountBank = new ArrayList<>();
 
+    @OneToMany(mappedBy = "user")
+    private List<CategoryEntity> category = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    private List<UserAccountEntity> account = new ArrayList<>();
+
 }

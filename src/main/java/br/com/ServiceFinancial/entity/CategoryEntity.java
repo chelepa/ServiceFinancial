@@ -13,28 +13,24 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name = "tb_account_bank")
-public class AccountBankEntity implements Serializable {
+@Table(name = "tb_category")
+public class CategoryEntity implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id_account_bank")
-    private Long accountBankId;
+    @Column(name="id_category")
+    private Long categoryId;
 
-    @Column(name="ds_account_bank")
-    private String accountBankDescription;
-
-    @Column(name="vl_account_bank")
-    private BigDecimal accountBankValue;
+    @Column(name="nm_category")
+    private String categoryName;
 
     @ManyToOne
     @JoinColumn(name="id_users")
     private UserEntity user;
 
-    @OneToMany(mappedBy = "accountBank", cascade = {CascadeType.ALL})
-    private List<OperationDetailsEntity> operationDetails = new ArrayList<>();
-
+    @OneToMany(mappedBy = "category", cascade = {CascadeType.ALL})
+    private List<SubCategoryEntity> subCategory = new ArrayList<>();
 }

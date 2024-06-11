@@ -4,6 +4,9 @@ CREATE TABLE IF NOT EXISTS tb_months_year (
   PRIMARY KEY (id_months, id_year),
   INDEX fk_tb_months_has_tb_year_tb_year_idx (id_year ASC) VISIBLE,
   INDEX fk_tb_months_has_tb_year_tb_months_idx (id_months ASC) VISIBLE,
-  CONSTRAINT fk_tb_months_has_tb_year_tb_months FOREIGN KEY (id_months) REFERENCES tb_months (id_months),
-  CONSTRAINT fk_tb_months_has_tb_year_tb_year FOREIGN KEY (id_year) REFERENCES tb_year (id_year)
-)
+  CONSTRAINT fk_tb_months_has_tb_year_tb_months
+    FOREIGN KEY (id_months)
+    REFERENCES tb_months (id_months),
+  CONSTRAINT fk_tb_months_has_tb_year_tb_year
+    FOREIGN KEY (id_year)
+    REFERENCES tb_year (id_year))

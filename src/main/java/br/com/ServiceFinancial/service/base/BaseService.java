@@ -22,6 +22,10 @@ public class BaseService {
     private YearEntityRepository yearEntityRepository;
     @Autowired
     private MonthsEntityRepository monthsEntityRepository;
+    @Autowired
+    private CategoryRepository categoryRepository;
+    @Autowired
+    private SubCategoryRepository subCategoryRepository;
 
     protected UserEntity createUserDb(UserEntity usersEntity){
         return userRepository.save(usersEntity);
@@ -85,5 +89,37 @@ public class BaseService {
 
     protected List<MonthsEntity> searchAllMonths() {
         return monthsEntityRepository.findAll();
+    }
+
+    protected CategoryEntity createCategoryDB(CategoryEntity entityRequest) {
+        return categoryRepository.save(entityRequest);
+    }
+
+    protected List<CategoryEntity> searchAllCategoryByUserId(Long userId) {
+        return categoryRepository.findByUser_userId(userId);
+    }
+
+    protected CategoryEntity searchCategoryByUserIdAndCategoryId(Long userId, Long categoryId) {
+        return categoryRepository.findByUser_userIdAndCategoryId(userId, categoryId);
+    }
+
+    protected void deleteCategory(CategoryEntity entity) {
+        categoryRepository.delete(entity);
+    }
+
+    protected SubCategoryEntity createSubCategoryDB(SubCategoryEntity entity) {
+        return subCategoryRepository.save(entity);
+    }
+
+    protected List<SubCategoryEntity> getAllSubCategoryByUserIdAndCategoryId(Long userId, Long categoryId) {
+        return subCategoryRepository.findByCategory_categoryIdAndCategory_User_userId(categoryId, userId);
+    }
+
+    protected SubCategoryEntity getAllSubCategoryByUserIdAndCategoryIdAndSubCategoryId(Long userId, Long categoryId, Long subCategoryId) {
+        return subCategoryRepository.findByCategory_categoryIdAndCategory_User_userIdAndSubCategoryId(categoryId, userId, subCategoryId);
+    }
+
+    protected void deleteSubCategory(SubCategoryEntity responseEntity) {
+        subCategoryRepository.delete(responseEntity);
     }
 }

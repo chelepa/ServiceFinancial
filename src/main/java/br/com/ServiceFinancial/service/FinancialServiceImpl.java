@@ -2,13 +2,19 @@ package br.com.ServiceFinancial.service;
 
 import br.com.ServiceFinancial.dto.account_bank.AccountBankRequestDTO;
 import br.com.ServiceFinancial.dto.account_bank.AccountBankResponseDTO;
+import br.com.ServiceFinancial.dto.category.CategoryRequestDTO;
+import br.com.ServiceFinancial.dto.category.CategoryResponseDTO;
 import br.com.ServiceFinancial.dto.operation_details.OperationDetailsRequestDTO;
 import br.com.ServiceFinancial.dto.operation_details.OperationDetailsResponseDTO;
 import br.com.ServiceFinancial.dto.operation_type.OperationTypeResponseDTO;
+import br.com.ServiceFinancial.dto.sub_category.SubCategoryRequestDTO;
+import br.com.ServiceFinancial.dto.sub_category.SubCategoryResponseDTO;
 import br.com.ServiceFinancial.dto.user.UserRequestDTO;
 import br.com.ServiceFinancial.dto.user.UserResponseDTO;
 import br.com.ServiceFinancial.dto.year.YearRequestDTO;
 import br.com.ServiceFinancial.dto.year.YearResponseDTO;
+import br.com.ServiceFinancial.service.category.CategoryService;
+import br.com.ServiceFinancial.service.category.SubCategoryService;
 import br.com.ServiceFinancial.service.operation.AccountBankService;
 import br.com.ServiceFinancial.service.operation.OperationDetailsService;
 import br.com.ServiceFinancial.service.operation.OperationTypeService;
@@ -28,6 +34,8 @@ public class FinancialServiceImpl implements FinancialService {
     private final AccountBankService accountBankService;
     private final OperationDetailsService operationDetailsService;
     private final YearService yearService;
+    private final CategoryService categoryService;
+    private final SubCategoryService subCategoryService;
 
     @Override
     public UserResponseDTO getUserById(Long userId) {
@@ -107,5 +115,45 @@ public class FinancialServiceImpl implements FinancialService {
     @Override
     public YearResponseDTO createYear(YearRequestDTO request) {
         return yearService.createYear(request);
+    }
+
+    @Override
+    public CategoryResponseDTO createCategory(CategoryRequestDTO request) {
+        return categoryService.createCategory(request);
+    }
+
+    @Override
+    public List<CategoryResponseDTO> getAllCategoryByUserId(Long userId) {
+        return categoryService.getAllCategoryByUserId(userId);
+    }
+
+    @Override
+    public void deleteCategoryByUserId(Long userId, Long categoryId) {
+        categoryService.deleteCategoryByUserId(userId, categoryId);
+    }
+
+    @Override
+    public CategoryResponseDTO updateCategoryByUserIdy(Long userId, Long categoryId, CategoryRequestDTO request) {
+        return categoryService.updateCategoryByUserIdy(userId, categoryId, request);
+    }
+
+    @Override
+    public SubCategoryResponseDTO createSubCategory(SubCategoryRequestDTO request) {
+        return subCategoryService.createSubCategory(request);
+    }
+
+    @Override
+    public List<SubCategoryResponseDTO> getAllSubCategoryByUserId(Long userId, Long categoryId) {
+        return subCategoryService.getAllSubCategoryByUserId(userId, categoryId);
+    }
+
+    @Override
+    public SubCategoryResponseDTO updateSubCategoryByUserId(Long userId, Long categoryId, Long subCategoryId, SubCategoryRequestDTO request) {
+        return subCategoryService.updateSubCategoryByUserId(userId, categoryId, subCategoryId, request);
+    }
+
+    @Override
+    public void deleteSubCategoryByUserId(Long userId, Long categoryId, Long subCategoryId) {
+        subCategoryService.deleteSubCategoryByUserId(userId, categoryId, subCategoryId);
     }
 }

@@ -2,9 +2,13 @@ package br.com.ServiceFinancial.service;
 
 import br.com.ServiceFinancial.dto.account_bank.AccountBankRequestDTO;
 import br.com.ServiceFinancial.dto.account_bank.AccountBankResponseDTO;
+import br.com.ServiceFinancial.dto.category.CategoryRequestDTO;
+import br.com.ServiceFinancial.dto.category.CategoryResponseDTO;
 import br.com.ServiceFinancial.dto.operation_details.OperationDetailsRequestDTO;
 import br.com.ServiceFinancial.dto.operation_details.OperationDetailsResponseDTO;
 import br.com.ServiceFinancial.dto.operation_type.OperationTypeResponseDTO;
+import br.com.ServiceFinancial.dto.sub_category.SubCategoryRequestDTO;
+import br.com.ServiceFinancial.dto.sub_category.SubCategoryResponseDTO;
 import br.com.ServiceFinancial.dto.user.UserRequestDTO;
 import br.com.ServiceFinancial.dto.user.UserResponseDTO;
 import br.com.ServiceFinancial.dto.year.YearRequestDTO;
@@ -34,4 +38,14 @@ public interface FinancialService {
     void deleteOperationDetailsByUserIdAndAccountId(Long userId, Long accountBankId, Long operationDetailsId);
 
     YearResponseDTO createYear(YearRequestDTO request);
+
+    CategoryResponseDTO createCategory(CategoryRequestDTO request);
+    CategoryResponseDTO updateCategoryByUserIdy(Long userId, Long categoryId, CategoryRequestDTO request);
+    List<CategoryResponseDTO> getAllCategoryByUserId(Long userId);
+    void deleteCategoryByUserId(Long userId, Long categoryId);
+
+    SubCategoryResponseDTO createSubCategory(SubCategoryRequestDTO request);
+    List<SubCategoryResponseDTO> getAllSubCategoryByUserId(Long userId, Long categoryId);
+    SubCategoryResponseDTO updateSubCategoryByUserId(Long userId, Long categoryId, Long subCategoryId, SubCategoryRequestDTO request);
+    void deleteSubCategoryByUserId(Long userId, Long categoryId, Long subCategoryId);
 }
