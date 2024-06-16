@@ -1,5 +1,6 @@
 package br.com.ServiceFinancial;
 
+import br.com.ServiceFinancial.converter.AccountRequestDTOToAccountEntityConverter;
 import br.com.ServiceFinancial.converter.UserEntityToUserResponseDTOConverter;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
@@ -16,7 +17,9 @@ public class ServiceFinancialApplication {
 	@Bean
 	public ModelMapper modelMapper() {
 		ModelMapper modelMapper = new ModelMapper();
+		modelMapper.getConfiguration().setAmbiguityIgnored(true);
 		modelMapper.addConverter(new UserEntityToUserResponseDTOConverter());
+//		modelMapper.addConverter(new AccountRequestDTOToAccountEntityConverter());
 		return modelMapper;
 	}
 }

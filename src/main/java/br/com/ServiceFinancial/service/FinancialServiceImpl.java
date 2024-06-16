@@ -1,5 +1,8 @@
 package br.com.ServiceFinancial.service;
 
+import br.com.ServiceFinancial.dto.account.AccountFilterResponseDTO;
+import br.com.ServiceFinancial.dto.account.AccountRequestDTO;
+import br.com.ServiceFinancial.dto.account.AccountResponseDTO;
 import br.com.ServiceFinancial.dto.account_bank.AccountBankRequestDTO;
 import br.com.ServiceFinancial.dto.account_bank.AccountBankResponseDTO;
 import br.com.ServiceFinancial.dto.category.CategoryRequestDTO;
@@ -13,6 +16,7 @@ import br.com.ServiceFinancial.dto.user.UserRequestDTO;
 import br.com.ServiceFinancial.dto.user.UserResponseDTO;
 import br.com.ServiceFinancial.dto.year.YearRequestDTO;
 import br.com.ServiceFinancial.dto.year.YearResponseDTO;
+import br.com.ServiceFinancial.service.account.AccountService;
 import br.com.ServiceFinancial.service.category.CategoryService;
 import br.com.ServiceFinancial.service.category.SubCategoryService;
 import br.com.ServiceFinancial.service.operation.AccountBankService;
@@ -36,6 +40,7 @@ public class FinancialServiceImpl implements FinancialService {
     private final YearService yearService;
     private final CategoryService categoryService;
     private final SubCategoryService subCategoryService;
+    private final AccountService accountService;
 
     @Override
     public UserResponseDTO getUserById(Long userId) {
@@ -165,5 +170,40 @@ public class FinancialServiceImpl implements FinancialService {
     @Override
     public void deleteSubCategoryByUserId(Long userId, Long categoryId, Long subCategoryId) {
         subCategoryService.deleteSubCategoryByUserId(userId, categoryId, subCategoryId);
+    }
+
+    @Override
+    public AccountResponseDTO createAccount(AccountRequestDTO request) {
+        return accountService.createAccount(request);
+    }
+
+    @Override
+    public List<AccountResponseDTO> createAllAccount(List<AccountRequestDTO> request) {
+        return accountService.createAllAccount(request);
+    }
+
+    @Override
+    public AccountResponseDTO paymentAccount(Long userId, Long accountId) {
+        return accountService.paymentAccount(userId, accountId);
+    }
+
+    @Override
+    public AccountResponseDTO getAccountByUserIdAndAccountId(Long userId, Long accountId) {
+        return accountService.getAccountByUserIdAndAccountId(userId, accountId);
+    }
+
+    @Override
+    public AccountFilterResponseDTO getAccount(Integer page, Integer size, String sort, String name, String userId, String monthId, String year, String categoryId, String subCategoryId) {
+        return accountService.getAccount(page, size, sort, name, userId, monthId, year, categoryId, subCategoryId);
+    }
+
+    @Override
+    public AccountResponseDTO updateAccount(Long userId, Long accountId, AccountRequestDTO request) {
+        return accountService.updateAccount(userId, accountId, request);
+    }
+
+    @Override
+    public void deleteAccount(Long userId, Long accountId) {
+        accountService.deleteAccount(userId, accountId);
     }
 }

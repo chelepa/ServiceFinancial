@@ -3,6 +3,9 @@ package br.com.ServiceFinancial.service.base;
 import br.com.ServiceFinancial.entity.*;
 import br.com.ServiceFinancial.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,6 +29,8 @@ public class BaseService {
     private CategoryRepository categoryRepository;
     @Autowired
     private SubCategoryRepository subCategoryRepository;
+    @Autowired
+    private AccountRepository accountRepository;
 
     protected UserEntity createUserDb(UserEntity usersEntity){
         return userRepository.save(usersEntity);
@@ -121,5 +126,21 @@ public class BaseService {
 
     protected void deleteSubCategory(SubCategoryEntity responseEntity) {
         subCategoryRepository.delete(responseEntity);
+    }
+
+    protected AccountEntity createAccountDB(AccountEntity entityRequest) {
+        return accountRepository.save(entityRequest);
+    }
+
+    protected Page<AccountEntity> getAccountDB(Specification<AccountEntity> byCriteria, PageRequest pageRequest) {
+        return accountRepository.findAll(byCriteria, pageRequest);
+    }
+
+    protected AccountEntity searchAccountByUserIdAndAccountId(Long userId, Long accountId) {
+        return accountRepository.findByUser_userIdAndAccountId(userId, accountId);
+    }
+
+    protected void deleteAccountDB(AccountEntity accountEntity) {
+        accountRepository.delete(accountEntity);
     }
 }

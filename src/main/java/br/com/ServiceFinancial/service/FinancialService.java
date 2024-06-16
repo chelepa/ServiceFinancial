@@ -1,5 +1,8 @@
 package br.com.ServiceFinancial.service;
 
+import br.com.ServiceFinancial.dto.account.AccountFilterResponseDTO;
+import br.com.ServiceFinancial.dto.account.AccountRequestDTO;
+import br.com.ServiceFinancial.dto.account.AccountResponseDTO;
 import br.com.ServiceFinancial.dto.account_bank.AccountBankRequestDTO;
 import br.com.ServiceFinancial.dto.account_bank.AccountBankResponseDTO;
 import br.com.ServiceFinancial.dto.category.CategoryRequestDTO;
@@ -50,4 +53,12 @@ public interface FinancialService {
     SubCategoryResponseDTO updateSubCategoryByUserId(Long userId, Long categoryId, Long subCategoryId, SubCategoryRequestDTO request);
     SubCategoryResponseDTO GetSubCategoryByUserIdAndCategoryIdAndSubCategoryId(Long userId, Long categoryId, Long subCategoryId);
     void deleteSubCategoryByUserId(Long userId, Long categoryId, Long subCategoryId);
+
+    AccountResponseDTO createAccount(AccountRequestDTO request);
+    List<AccountResponseDTO> createAllAccount(List<AccountRequestDTO> request);
+    AccountResponseDTO paymentAccount(Long userId, Long accountId);
+    AccountResponseDTO getAccountByUserIdAndAccountId(Long userId, Long accountId);
+    AccountFilterResponseDTO getAccount(Integer page, Integer size, String sort, String name, String userId, String monthId, String year, String categoryId, String subCategoryId);
+    AccountResponseDTO updateAccount(Long userId, Long accountId, AccountRequestDTO request);
+    void deleteAccount(Long userId, Long accountId);
 }
