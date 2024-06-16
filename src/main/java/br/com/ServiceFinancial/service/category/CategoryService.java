@@ -2,8 +2,6 @@ package br.com.ServiceFinancial.service.category;
 
 import br.com.ServiceFinancial.dto.category.CategoryRequestDTO;
 import br.com.ServiceFinancial.dto.category.CategoryResponseDTO;
-import br.com.ServiceFinancial.dto.operation_details.OperationDetailsResponseDTO;
-import br.com.ServiceFinancial.entity.AccountBankEntity;
 import br.com.ServiceFinancial.entity.CategoryEntity;
 import br.com.ServiceFinancial.service.base.BaseService;
 import lombok.extern.slf4j.Slf4j;

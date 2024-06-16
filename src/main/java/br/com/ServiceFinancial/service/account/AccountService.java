@@ -7,17 +7,12 @@ import br.com.ServiceFinancial.dto.account.AccountResponseDTO;
 import br.com.ServiceFinancial.dto.filter.AccountFilterDTO;
 import br.com.ServiceFinancial.entity.AccountEntity;
 import br.com.ServiceFinancial.service.base.BaseService;
-import br.com.ServiceFinancial.specification.SpecificationAccountByFilter;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -73,8 +68,8 @@ public class AccountService extends BaseService {
     public AccountResponseDTO updateAccount(Long userId, Long accountId, AccountRequestDTO request) {
         log.info("AccountService.updateAccount - Start - UserId: [{}], AccountId: [{}], AccountRequestDTO: [{}]", userId, accountId, request);
         var accountEntity = this.searchAccountByUserIdAndAccountId(userId, accountId);
-            modelMapper.map(request, accountEntity);
-        var created = this.createAccountDB(accountEntity);
+        var update = accountConverter.updateAccount(accountEntity, request);
+        var created = this.createAccountDB(update);
         var response = modelMapper.map(created, AccountResponseDTO.class);
         log.info("AccountService.updateAccount - End - UserId: [{}], AccountId: [{}], AccountRequestDTO: [{}], Response: [{}]", userId, accountId, request, response);
         return response;
