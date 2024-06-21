@@ -1,78 +1,50 @@
 package br.com.ServiceFinancial.service;
 
+import br.com.ServiceFinancial.dto.account.AccountFilterResponseDTO;
+import br.com.ServiceFinancial.dto.account.AccountRequestDTO;
+import br.com.ServiceFinancial.dto.account.AccountResponseDTO;
+import br.com.ServiceFinancial.dto.account_bank.AccountBankRequestDTO;
+import br.com.ServiceFinancial.dto.account_bank.AccountBankResponseDTO;
 import br.com.ServiceFinancial.dto.category.CategoryRequestDTO;
 import br.com.ServiceFinancial.dto.category.CategoryResponseDTO;
-import br.com.ServiceFinancial.dto.expenses_and_income.ExpensesAndIncomeRequestDTO;
-import br.com.ServiceFinancial.dto.expenses_and_income.ExpensesAndIncomeResponseDTO;
-import br.com.ServiceFinancial.dto.months.MonthsResponseDTO;
+import br.com.ServiceFinancial.dto.operation_details.OperationDetailsRequestDTO;
+import br.com.ServiceFinancial.dto.operation_details.OperationDetailsResponseDTO;
+import br.com.ServiceFinancial.dto.operation_type.OperationTypeResponseDTO;
 import br.com.ServiceFinancial.dto.sub_category.SubCategoryRequestDTO;
 import br.com.ServiceFinancial.dto.sub_category.SubCategoryResponseDTO;
-import br.com.ServiceFinancial.dto.users.UserRequestDTO;
-import br.com.ServiceFinancial.dto.users.UserResponseDTO;
+import br.com.ServiceFinancial.dto.user.UserRequestDTO;
+import br.com.ServiceFinancial.dto.user.UserResponseDTO;
 import br.com.ServiceFinancial.dto.year.YearRequestDTO;
 import br.com.ServiceFinancial.dto.year.YearResponseDTO;
+import br.com.ServiceFinancial.service.account.AccountService;
 import br.com.ServiceFinancial.service.category.CategoryService;
-import br.com.ServiceFinancial.service.expenses_and_income.ExpensesAndIncomeService;
-import br.com.ServiceFinancial.service.months.MonthsService;
-import br.com.ServiceFinancial.service.report.ReportService;
-import br.com.ServiceFinancial.service.sub_category.SubCategoryService;
+import br.com.ServiceFinancial.service.category.SubCategoryService;
+import br.com.ServiceFinancial.service.operation.AccountBankService;
+import br.com.ServiceFinancial.service.operation.OperationDetailsService;
+import br.com.ServiceFinancial.service.operation.OperationTypeService;
 import br.com.ServiceFinancial.service.user.UserService;
 import br.com.ServiceFinancial.service.year.YearService;
-import com.itextpdf.text.DocumentException;
-import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class FinancialServiceImpl implements FinancialService {
 
-    @Autowired
-    private CategoryService categoryService;
-
-    @Autowired
-    private UserService userService;
-
-    @Autowired
-    private SubCategoryService subCategoryService;
-
-    @Autowired
-    private YearService yearService;
-
-    @Autowired
-    private MonthsService monthsService;
-
-    @Autowired
-    private ExpensesAndIncomeService expensesAndIncomeService;
-
-    @Autowired
-    private ReportService reportService;
+    private final UserService userService;
+    private final OperationTypeService operationTypeService;
+    private final AccountBankService accountBankService;
+    private final OperationDetailsService operationDetailsService;
+    private final YearService yearService;
+    private final CategoryService categoryService;
+    private final SubCategoryService subCategoryService;
+    private final AccountService accountService;
 
     @Override
-    public CategoryResponseDTO createCategory(CategoryRequestDTO request) {
-        return categoryService.createCategory(request);
-    }
-
-    @Override
-    public CategoryResponseDTO getCategoryById(Long id) {
-        return categoryService.getCategoryById(id);
-    }
-
-    @Override
-    public List<CategoryResponseDTO> getAllCategory() {
-        return categoryService.getAllCategory();
-    }
-
-    @Override
-    public void deleteCategoryById(Long id) {
-        categoryService.deleteCategoryById(id);
-    }
-
-    @Override
-    public CategoryResponseDTO updateCategoryById(Long id, CategoryRequestDTO request) {
-        return categoryService.updateCategoryById(id, request);
+    public UserResponseDTO getUserById(Long userId) {
+        return userService.getUserById(userId);
     }
 
     @Override
@@ -81,38 +53,68 @@ public class FinancialServiceImpl implements FinancialService {
     }
 
     @Override
-    public UserResponseDTO getUserById(Long id) {
-        return userService.getUserById(id);
+    public void deleteUserById(Long userId) {
+        userService.deleteUserById(userId);
     }
 
     @Override
-    public void deleteUserById(Long id) {
-        userService.deleteUserById(id);
+    public OperationTypeResponseDTO getOperationTypeById(Long id) {
+        return operationTypeService.getOperationTypeById(id);
     }
 
     @Override
-    public SubCategoryResponseDTO createSubCategory(SubCategoryRequestDTO request) {
-        return subCategoryService.createSubCategory(request);
+    public List<OperationTypeResponseDTO> getAllOperationType() {
+        return operationTypeService.getAllOperationType();
     }
 
     @Override
-    public SubCategoryResponseDTO getSubCategoryById(Long id) {
-        return subCategoryService.getSubCategoryById(id);
+    public AccountBankResponseDTO createAccountBank(AccountBankRequestDTO request) {
+        return accountBankService.createAccountBank(request);
     }
 
     @Override
-    public List<SubCategoryResponseDTO> getAllSubCategory() {
-        return subCategoryService.getAllSubCategory();
+    public List<AccountBankResponseDTO> getAccountBankByUserId(Long userId) {
+        return accountBankService.getAccountBankByUserId(userId);
     }
 
     @Override
-    public void deleteSubCategory(Long id) {
-        subCategoryService.deleteSubCategory(id);
+    public AccountBankResponseDTO getAccountBankByUserIdAndId(Long userId, Long id) {
+        return accountBankService.getAccountBankByUserIdAndId(userId, id);
     }
 
     @Override
-    public SubCategoryResponseDTO updateSubCategoryById(Long id, SubCategoryRequestDTO request) {
-        return subCategoryService.updateSubCategoryById(id, request);
+    public AccountBankResponseDTO updateAccountBankByUserIdAndId(Long userId, Long id, AccountBankRequestDTO request) {
+        return accountBankService.updateAccountBankByUserIdAndId(userId, id, request);
+    }
+
+    @Override
+    public void deleteAccountBankByUserIdAndId(Long userId, Long id) {
+        accountBankService.deleteAccountBankByUserIdAndId(userId, id);
+    }
+
+    @Override
+    public OperationDetailsResponseDTO createOperationDetails(OperationDetailsRequestDTO request) {
+        return operationDetailsService.createOperationDetails(request);
+    }
+
+    @Override
+    public List<OperationDetailsResponseDTO> getOperationDetailsByUserIdAndAccountId(Long userId, Long accountBankId) {
+        return operationDetailsService.getOperationDetailsByUserIdAndAccountId(userId, accountBankId);
+    }
+
+    @Override
+    public List<OperationDetailsResponseDTO> getOperationDetailsByUserIdAndAccountIdAndOperationTypeId(Long userId, Long accountBankId, Long operationTypeId) {
+        return operationDetailsService.getOperationDetailsByUserIdAndAccountIdAndOperationTypeId(userId, accountBankId, operationTypeId);
+    }
+
+    @Override
+    public OperationDetailsResponseDTO updateOperationDetailsByUserIdAndAccountId(Long userId, Long accountBankId, Long operationDetailsId, OperationDetailsRequestDTO request) {
+        return operationDetailsService.updateOperationDetailsByUserIdAndAccountId(userId, accountBankId, operationDetailsId, request);
+    }
+
+    @Override
+    public void deleteOperationDetailsByUserIdAndAccountId(Long userId, Long accountBankId, Long operationDetailsId) {
+        operationDetailsService.deleteOperationDetailsByUserIdAndAccountId(userId, accountBankId, operationDetailsId);
     }
 
     @Override
@@ -121,67 +123,87 @@ public class FinancialServiceImpl implements FinancialService {
     }
 
     @Override
-    public List<YearResponseDTO> createAllYear(List<YearRequestDTO> request) {
-        return yearService.createAllYear(request);
+    public CategoryResponseDTO createCategory(CategoryRequestDTO request) {
+        return categoryService.createCategory(request);
     }
 
     @Override
-    public YearResponseDTO getYearById(Long id) {
-        return yearService.getYearById(id);
+    public CategoryResponseDTO getAllCategoryByUserIdAndCategoryId(Long userId, Long categoryId) {
+        return categoryService.getAllCategoryByUserIdAndCategoryId(userId, categoryId);
     }
 
     @Override
-    public List<YearResponseDTO> getAllYear() {
-        return yearService.getAllYear();
+    public List<CategoryResponseDTO> getAllCategoryByUserId(Long userId) {
+        return categoryService.getAllCategoryByUserId(userId);
     }
 
     @Override
-    public void createReportYear(Long userId, Long year, HttpServletResponse response) throws DocumentException, IOException {
-        reportService.createReportYear(userId, year, response);
+    public void deleteCategoryByUserId(Long userId, Long categoryId) {
+        categoryService.deleteCategoryByUserId(userId, categoryId);
     }
 
     @Override
-    public void deleteYearById(Long id) {
-        yearService.deleteYearById(id);
+    public CategoryResponseDTO updateCategoryByUserId(Long userId, Long categoryId, CategoryRequestDTO request) {
+        return categoryService.updateCategoryByUserId(userId, categoryId, request);
     }
 
     @Override
-    public MonthsResponseDTO getMonthsById(Long id) {
-        return monthsService.getMonthsById(id);
+    public SubCategoryResponseDTO createSubCategory(SubCategoryRequestDTO request) {
+        return subCategoryService.createSubCategory(request);
     }
 
     @Override
-    public List<MonthsResponseDTO> getAllMonths() {
-        return monthsService.getAllMonths();
+    public List<SubCategoryResponseDTO> getAllSubCategoryByUserId(Long userId, Long categoryId) {
+        return subCategoryService.getAllSubCategoryByUserId(userId, categoryId);
     }
 
     @Override
-    public void createReportMonths(Long userId, Long year, String months, HttpServletResponse response) throws DocumentException, IOException {
-        reportService.createReportMonths(userId, year, months, response);
+    public SubCategoryResponseDTO updateSubCategoryByUserId(Long userId, Long categoryId, Long subCategoryId, SubCategoryRequestDTO request) {
+        return subCategoryService.updateSubCategoryByUserId(userId, categoryId, subCategoryId, request);
     }
 
     @Override
-    public List<ExpensesAndIncomeResponseDTO> createAllExpensesAndIncome(List<ExpensesAndIncomeRequestDTO> request) {
-        return expensesAndIncomeService.createAllExpensesAndIncome(request);
+    public SubCategoryResponseDTO GetSubCategoryByUserIdAndCategoryIdAndSubCategoryId(Long userId, Long categoryId, Long subCategoryId) {
+        return subCategoryService.getSubCategoryByUserIdAndCategoryIdAndSubCategoryId(userId, categoryId, subCategoryId);
     }
 
     @Override
-    public ExpensesAndIncomeResponseDTO createExpensesAndIncome(ExpensesAndIncomeRequestDTO request) {
-        return expensesAndIncomeService.createExpensesAndIncome(request);
+    public void deleteSubCategoryByUserId(Long userId, Long categoryId, Long subCategoryId) {
+        subCategoryService.deleteSubCategoryByUserId(userId, categoryId, subCategoryId);
     }
 
     @Override
-    public ExpensesAndIncomeResponseDTO getExpensesAndIncomeById(Long id) {
-        return expensesAndIncomeService.getExpensesAndIncomeById(id);
+    public AccountResponseDTO createAccount(AccountRequestDTO request) {
+        return accountService.createAccount(request);
     }
 
     @Override
-    public ExpensesAndIncomeResponseDTO updateExpensesAndIncomeById(Long id, ExpensesAndIncomeRequestDTO request) {
-        return expensesAndIncomeService.updateExpensesAndIncomeById(id, request);
+    public List<AccountResponseDTO> createAllAccount(List<AccountRequestDTO> request) {
+        return accountService.createAllAccount(request);
     }
 
     @Override
-    public void deleteExpensesAndIncome(Long id) {
-        expensesAndIncomeService.deleteExpensesAndIncome(id);
+    public AccountResponseDTO paymentAccount(Long userId, Long accountId) {
+        return accountService.paymentAccount(userId, accountId);
+    }
+
+    @Override
+    public AccountResponseDTO getAccountByUserIdAndAccountId(Long userId, Long accountId) {
+        return accountService.getAccountByUserIdAndAccountId(userId, accountId);
+    }
+
+    @Override
+    public AccountFilterResponseDTO getAccount(Integer page, Integer size, String sort, String name, String userId, String monthId, String year, String categoryId, String subCategoryId) {
+        return accountService.getAccount(page, size, sort, name, userId, monthId, year, categoryId, subCategoryId);
+    }
+
+    @Override
+    public AccountResponseDTO updateAccount(Long userId, Long accountId, AccountRequestDTO request) {
+        return accountService.updateAccount(userId, accountId, request);
+    }
+
+    @Override
+    public void deleteAccount(Long userId, Long accountId) {
+        accountService.deleteAccount(userId, accountId);
     }
 }

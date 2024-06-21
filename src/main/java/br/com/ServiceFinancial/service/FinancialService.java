@@ -1,54 +1,64 @@
 package br.com.ServiceFinancial.service;
 
+import br.com.ServiceFinancial.dto.account.AccountFilterResponseDTO;
+import br.com.ServiceFinancial.dto.account.AccountRequestDTO;
+import br.com.ServiceFinancial.dto.account.AccountResponseDTO;
+import br.com.ServiceFinancial.dto.account_bank.AccountBankRequestDTO;
+import br.com.ServiceFinancial.dto.account_bank.AccountBankResponseDTO;
 import br.com.ServiceFinancial.dto.category.CategoryRequestDTO;
 import br.com.ServiceFinancial.dto.category.CategoryResponseDTO;
-import br.com.ServiceFinancial.dto.expenses_and_income.ExpensesAndIncomeRequestDTO;
-import br.com.ServiceFinancial.dto.expenses_and_income.ExpensesAndIncomeResponseDTO;
-import br.com.ServiceFinancial.dto.months.MonthsResponseDTO;
+import br.com.ServiceFinancial.dto.operation_details.OperationDetailsRequestDTO;
+import br.com.ServiceFinancial.dto.operation_details.OperationDetailsResponseDTO;
+import br.com.ServiceFinancial.dto.operation_type.OperationTypeResponseDTO;
 import br.com.ServiceFinancial.dto.sub_category.SubCategoryRequestDTO;
 import br.com.ServiceFinancial.dto.sub_category.SubCategoryResponseDTO;
-import br.com.ServiceFinancial.dto.users.UserRequestDTO;
-import br.com.ServiceFinancial.dto.users.UserResponseDTO;
+import br.com.ServiceFinancial.dto.user.UserRequestDTO;
+import br.com.ServiceFinancial.dto.user.UserResponseDTO;
 import br.com.ServiceFinancial.dto.year.YearRequestDTO;
 import br.com.ServiceFinancial.dto.year.YearResponseDTO;
-import com.itextpdf.text.DocumentException;
-import jakarta.servlet.http.HttpServletResponse;
 
-import java.io.IOException;
 import java.util.List;
 
 public interface FinancialService {
 
-    CategoryResponseDTO createCategory(CategoryRequestDTO request);
-    CategoryResponseDTO getCategoryById(Long id);
-    List<CategoryResponseDTO> getAllCategory();
-    void deleteCategoryById(Long id);
-    CategoryResponseDTO updateCategoryById(Long id, CategoryRequestDTO request);
-
+    UserResponseDTO getUserById(Long userId);
     UserResponseDTO createUser(UserRequestDTO request);
-    UserResponseDTO getUserById(Long id);
-    void deleteUserById(Long id);
+    void deleteUserById(Long userId);
 
-    SubCategoryResponseDTO createSubCategory(SubCategoryRequestDTO request);
-    SubCategoryResponseDTO getSubCategoryById(Long id);
-    List<SubCategoryResponseDTO> getAllSubCategory();
-    void deleteSubCategory(Long id);
-    SubCategoryResponseDTO updateSubCategoryById(Long id, SubCategoryRequestDTO request);
+    OperationTypeResponseDTO getOperationTypeById(Long id);
+    List<OperationTypeResponseDTO> getAllOperationType();
+
+    AccountBankResponseDTO createAccountBank(AccountBankRequestDTO request);
+    List<AccountBankResponseDTO> getAccountBankByUserId(Long userId);
+    AccountBankResponseDTO getAccountBankByUserIdAndId(Long userId, Long id);
+    AccountBankResponseDTO updateAccountBankByUserIdAndId(Long userId, Long id, AccountBankRequestDTO request);
+    void deleteAccountBankByUserIdAndId(Long userId, Long id);
+
+    OperationDetailsResponseDTO createOperationDetails(OperationDetailsRequestDTO request);
+    List<OperationDetailsResponseDTO> getOperationDetailsByUserIdAndAccountId(Long userId, Long accountBankId);
+    List<OperationDetailsResponseDTO> getOperationDetailsByUserIdAndAccountIdAndOperationTypeId(Long userId, Long accountBankId, Long operationTypeId);
+    OperationDetailsResponseDTO updateOperationDetailsByUserIdAndAccountId(Long userId, Long accountBankId, Long operationDetailsId, OperationDetailsRequestDTO request);
+    void deleteOperationDetailsByUserIdAndAccountId(Long userId, Long accountBankId, Long operationDetailsId);
 
     YearResponseDTO createYear(YearRequestDTO request);
-    List<YearResponseDTO> createAllYear(List<YearRequestDTO> request);
-    YearResponseDTO getYearById(Long id);
-    List<YearResponseDTO> getAllYear();
-    void createReportYear(Long userId, Long year, HttpServletResponse response) throws DocumentException, IOException;
-    void deleteYearById(Long id);
 
-    MonthsResponseDTO getMonthsById(Long id);
-    List<MonthsResponseDTO> getAllMonths();
-    void createReportMonths(Long userId, Long year, String months, HttpServletResponse response) throws DocumentException, IOException;
+    CategoryResponseDTO createCategory(CategoryRequestDTO request);
+    CategoryResponseDTO getAllCategoryByUserIdAndCategoryId(Long userId, Long categoryId);
+    CategoryResponseDTO updateCategoryByUserId(Long userId, Long categoryId, CategoryRequestDTO request);
+    List<CategoryResponseDTO> getAllCategoryByUserId(Long userId);
+    void deleteCategoryByUserId(Long userId, Long categoryId);
 
-    List<ExpensesAndIncomeResponseDTO> createAllExpensesAndIncome(List<ExpensesAndIncomeRequestDTO> request);
-    ExpensesAndIncomeResponseDTO createExpensesAndIncome(ExpensesAndIncomeRequestDTO request);
-    ExpensesAndIncomeResponseDTO getExpensesAndIncomeById(Long id);
-    ExpensesAndIncomeResponseDTO updateExpensesAndIncomeById(Long id, ExpensesAndIncomeRequestDTO request);
-    void deleteExpensesAndIncome(Long id);
+    SubCategoryResponseDTO createSubCategory(SubCategoryRequestDTO request);
+    List<SubCategoryResponseDTO> getAllSubCategoryByUserId(Long userId, Long categoryId);
+    SubCategoryResponseDTO updateSubCategoryByUserId(Long userId, Long categoryId, Long subCategoryId, SubCategoryRequestDTO request);
+    SubCategoryResponseDTO GetSubCategoryByUserIdAndCategoryIdAndSubCategoryId(Long userId, Long categoryId, Long subCategoryId);
+    void deleteSubCategoryByUserId(Long userId, Long categoryId, Long subCategoryId);
+
+    AccountResponseDTO createAccount(AccountRequestDTO request);
+    List<AccountResponseDTO> createAllAccount(List<AccountRequestDTO> request);
+    AccountResponseDTO paymentAccount(Long userId, Long accountId);
+    AccountResponseDTO getAccountByUserIdAndAccountId(Long userId, Long accountId);
+    AccountFilterResponseDTO getAccount(Integer page, Integer size, String sort, String name, String userId, String monthId, String year, String categoryId, String subCategoryId);
+    AccountResponseDTO updateAccount(Long userId, Long accountId, AccountRequestDTO request);
+    void deleteAccount(Long userId, Long accountId);
 }

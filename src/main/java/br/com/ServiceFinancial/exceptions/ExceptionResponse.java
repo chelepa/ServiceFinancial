@@ -14,9 +14,9 @@ public class ExceptionResponse implements Serializable {
 	@Serial
     private static final long serialVersionUID = 1101390528006902187L;
 	
-	private String code;
-    private String message;
-    private List<String> details;
+	private final String code;
+    private final String message;
+    private final List<String> details;
     
     public ExceptionResponse(ErrorCodesEnum errorCode, String details) {
         this.code = errorCode.name();

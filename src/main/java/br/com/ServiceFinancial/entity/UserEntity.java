@@ -19,12 +19,16 @@ public class UserEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "id_users")
-    private Long id;
+    @Column(name="id_users")
+    private Long userId;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user")
+    private List<AccountBankEntity> accountBank = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
     private List<CategoryEntity> category = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<YearUserEntity> year = new ArrayList<>();
+    @OneToMany(mappedBy = "user")
+    private List<AccountEntity> account = new ArrayList<>();
+
 }

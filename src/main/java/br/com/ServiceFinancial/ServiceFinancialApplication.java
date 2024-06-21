@@ -1,7 +1,7 @@
 package br.com.ServiceFinancial;
 
-import br.com.ServiceFinancial.converter.CategoryRequestDTOToCategoryEntityConverter;
-import br.com.ServiceFinancial.converter.SubCategoryRequestDTOToSubCategoryEntityConverter;
+import br.com.ServiceFinancial.converter.AccountEntityToAccountResponseDTOConverter;
+import br.com.ServiceFinancial.converter.UserEntityToUserResponseDTOConverter;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,10 +17,9 @@ public class ServiceFinancialApplication {
 	@Bean
 	public ModelMapper modelMapper() {
 		ModelMapper modelMapper = new ModelMapper();
-		modelMapper.addConverter(new CategoryRequestDTOToCategoryEntityConverter());
-		modelMapper.addConverter(new SubCategoryRequestDTOToSubCategoryEntityConverter());
-//		modelMapper.addConverter(new GroupRequestDTOToGroupEntityConverter());
-//		modelMapper.addConverter(new UsersEntityToPasswordResetEntityConverter());
+		modelMapper.getConfiguration().setAmbiguityIgnored(true);
+		modelMapper.addConverter(new UserEntityToUserResponseDTOConverter());
+		modelMapper.addConverter(new AccountEntityToAccountResponseDTOConverter());
 		return modelMapper;
 	}
 }

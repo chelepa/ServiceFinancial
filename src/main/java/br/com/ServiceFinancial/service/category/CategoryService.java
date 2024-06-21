@@ -20,45 +20,44 @@ public class CategoryService extends BaseService {
 
     public CategoryResponseDTO createCategory(CategoryRequestDTO request) {
         log.info("CategoryService.createCategory - Start - CategoryRequestDTO: [{}]", request);
-        var entity = modelMapper.map(request, CategoryEntity.class);
-            entity.setUser(this.searchUserById(request.getUserId()));
-        var newEntity = this.saveCategory(entity);
-        var response = modelMapper.map(newEntity, CategoryResponseDTO.class);
-        log.info("CategoryService.createCategory - End - CategoryResponseDTO: [{}]", response);
-        return response;
-    }
-
-    public CategoryResponseDTO getCategoryById(Long id) {
-        log.info("CategoryService.getCategoryById - Start - Id: [{}]", id);
-        var entity = this.searchCategoryById(id);
+        var entityRequest = modelMapper.map(request, CategoryEntity.class);
+            entityRequest.setCategoryId(null);
+        var entity = this.createCategoryDB(entityRequest);
         var response = modelMapper.map(entity, CategoryResponseDTO.class);
-        log.info("CategoryService.getCategoryById - End -  Id: [{}] CategoryResponseDTO: [{}]", id, response);
+        log.info("CategoryService.createCategory - End - CategoryRequestDTO: [{}], CategoryResponseDTO: [{}]", request, response);
         return response;
     }
 
-    public List<CategoryResponseDTO> getAllCategory() {
-        log.info("CategoryService.getAllCategory - Start - ");
-        var listCategory = this.searchAllCategory();
-        var response = listCategory.stream().map(category -> modelMapper.map(category, CategoryResponseDTO.class)).toList();
-        log.info("CategoryService.getAllCategory - End - Response: [{}]", response);
+    public List<CategoryResponseDTO> getAllCategoryByUserId(Long userId) {
+        log.info("CategoryService.getAllCategoryByUserId - Start - UserId: [{}]", userId);
+        var entity = this.searchAllCategoryByUserId(userId);
+        var responseList = entity.stream().map(item -> modelMapper.map(item, CategoryResponseDTO.class)).toList();
+        log.info("CategoryService.getAllCategoryByUserId - End - UserId: [{}], Response: [{}]", userId, responseList);
+        return responseList;
+    }
+
+    public CategoryResponseDTO updateCategoryByUserId(Long userId, Long categoryId, CategoryRequestDTO request) {
+        log.info("CategoryService.UpdateAllCategoryByUserIdy - Start - UserId: [{}], CategoryId: [{}], CategoryRequestDTO: [{}]", userId, categoryId, request);
+        var entityResponse = this.searchCategoryByUserIdAndCategoryId(userId, categoryId);
+            entityResponse.setCategoryName(request.getCategoryName());
+        var entity = this.createCategoryDB(entityResponse);
+        var response = modelMapper.map(entity, CategoryResponseDTO.class);
+        log.info("CategoryService.UpdateAllCategoryByUserIdy - End - UserId: [{}], CategoryId: [{}], CategoryRequestDTO: [{}], Response: [{}]", userId, categoryId, request, response);
         return response;
     }
 
-    public void deleteCategoryById(Long id) {
-        log.info("CategoryService.deleteCategoryById - Start - Id: [{}]", id);
-        var entity = this.searchCategoryById(id);
-        this.removeCategory(entity);
-        log.info("CategoryService.deleteCategoryById - End - id: [{}] - Deleted", id);
+    public void deleteCategoryByUserId(Long userId, Long categoryId) {
+        log.info("CategoryService.DeleteCategoryByUserId - Start - UserId: [{}], CategoryId: [{}]", userId, categoryId);
+        var entityResponse = this.searchCategoryByUserIdAndCategoryId(userId, categoryId);
+        this.deleteCategory(entityResponse);
+        log.info("CategoryService.DeleteCategoryByUserId - End - UserId: [{}], CategoryId: [{}], Status: [DELETED]", userId, categoryId);
     }
 
-    public CategoryResponseDTO updateCategoryById(Long id, CategoryRequestDTO request) {
-        log.info("CategoryService.updateCategoryById - Start - Id: [{}] CategoryRequestDTO: [{}]", id, request);
-        var entity = this.searchCategoryById(id);
-        modelMapper.map(request, entity);
-        entity.setId(id);
-        var newEntity = this.saveCategory(entity);
-        var response = modelMapper.map(newEntity, CategoryResponseDTO.class);
-        log.info("CategoryService.updateCategoryById - End - Id: [{}] CategoryRequestDTO: [{}] CategoryResponseDTO: [{}]",  id, request, response);
+    public CategoryResponseDTO getAllCategoryByUserIdAndCategoryId(Long userId, Long categoryId) {
+        log.info("CategoryService.GetAllCategoryByUserIdAndCategoryId - Start - UserId: [{}], CategoryId: [{}]", userId, categoryId);
+        var entity = this.searchCategoryByUserIdAndCategoryId(userId, categoryId);
+        var response = modelMapper.map(entity, CategoryResponseDTO.class);
+        log.info("CategoryService.GetAllCategoryByUserIdAndCategoryId - End - UserId: [{}], CategoryId: [{}], CategoryResponseDTO: [{}]", userId, categoryId, response);
         return response;
     }
 }

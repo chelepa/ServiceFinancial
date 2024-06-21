@@ -5,10 +5,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class SubCategoryRequestDTO {
 
-    private String name;
+    private String subCategoryName;
     private Long categoryId;
 }

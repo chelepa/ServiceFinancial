@@ -20,16 +20,16 @@ public class CategoryEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_category")
-    private Long id;
+    @Column(name="id_category")
+    private Long categoryId;
 
-    @Column(name = "nm_category")
-    private String name;
+    @Column(name="nm_category")
+    private String categoryName;
 
     @ManyToOne
-    @JoinColumn(name = "id_users")
+    @JoinColumn(name="id_users")
     private UserEntity user;
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
-    private List<SubCategoryEntity> listSubCategory = new ArrayList<>();
+    @OneToMany(mappedBy = "category", cascade = {CascadeType.ALL})
+    private List<SubCategoryEntity> subCategory = new ArrayList<>();
 }
