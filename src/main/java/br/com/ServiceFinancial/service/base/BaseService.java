@@ -1,6 +1,7 @@
 package br.com.ServiceFinancial.service.base;
 
 import br.com.ServiceFinancial.entity.*;
+import br.com.ServiceFinancial.exceptions.*;
 import br.com.ServiceFinancial.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -37,7 +38,7 @@ public class BaseService {
     }
 
     protected UserEntity searchUserById(Long userId) {
-        return userRepository.findById(userId).orElseGet(null);
+        return userRepository.findById(userId).orElseThrow(() -> new UserException(String.format("User Not Found - userId: [%s] ", userId)));
     }
 
     protected void removeUserEntity(UserEntity userEntity) {
@@ -45,7 +46,7 @@ public class BaseService {
     }
 
     protected OperationTypeEntity searchOperationTypeById(Long id) {
-        return operationTypeRepository.findById(id).orElseGet(null);
+        return operationTypeRepository.findById(id).orElseThrow(() -> new OperationTypeException(String.format("Operation Type Not Found - Id: [%s] ", id)));
     }
 
     protected List<OperationTypeEntity> searchAllOperationType() {
@@ -61,7 +62,7 @@ public class BaseService {
     }
 
     protected AccountBankEntity getAllAccountBankByUserIdAndId(Long accountBankId, Long userId) {
-        return accountBankRepository.findByAccountBankIdAndUser_userId(accountBankId, userId);
+        return accountBankRepository.findByAccountBankIdAndUser_userId(accountBankId, userId).orElseThrow(() -> new AccountBankException(String.format("Account Bank Not Found - AccountBankId: [%s], UserId: [%s] ", accountBankId, userId)));
     }
 
     protected void deleteAccountBank(AccountBankEntity entity) {
@@ -81,7 +82,7 @@ public class BaseService {
     }
 
     protected OperationDetailsEntity searchOperationDetailsByUserIdAndAccountIdAndOperationDetailId(Long accountBankId, Long userId, Long operationDetailId) {
-        return operationDetailsRepository.findByAccountBank_accountBankIdAndAccountBank_user_userIdAndOperationDetailId(accountBankId, userId, operationDetailId).orElseGet(null);
+        return operationDetailsRepository.findByAccountBank_accountBankIdAndAccountBank_user_userIdAndOperationDetailId(accountBankId, userId, operationDetailId).orElseThrow(() -> new OperationDetailsException(String.format("Operation Details Not Found - AccountBankId: [%s], UserId: [%s], OperationDetailId: [%s] ", accountBankId, userId, operationDetailId)));
     }
 
     protected void deleteOperationDetailsByUserIdAndAccountIdDB(OperationDetailsEntity entityRequest) {
@@ -105,7 +106,7 @@ public class BaseService {
     }
 
     protected CategoryEntity searchCategoryByUserIdAndCategoryId(Long userId, Long categoryId) {
-        return categoryRepository.findByUser_userIdAndCategoryId(userId, categoryId);
+        return categoryRepository.findByUser_userIdAndCategoryId(userId, categoryId).orElseThrow(() -> new CategoryException(String.format("Category Not Found - UserId: [%s], categoryId: [%s] ", userId, categoryId)));
     }
 
     protected void deleteCategory(CategoryEntity entity) {
@@ -121,7 +122,7 @@ public class BaseService {
     }
 
     protected SubCategoryEntity getAllSubCategoryByUserIdAndCategoryIdAndSubCategoryId(Long userId, Long categoryId, Long subCategoryId) {
-        return subCategoryRepository.findByCategory_categoryIdAndCategory_User_userIdAndSubCategoryId(categoryId, userId, subCategoryId);
+        return subCategoryRepository.findByCategory_categoryIdAndCategory_User_userIdAndSubCategoryId(categoryId, userId, subCategoryId).orElseThrow(() -> new SubCategoryException(String.format("SubCategory Not Found - UserId: [%s], categoryId: [%s], subCategoryId: [%s]", userId, categoryId, subCategoryId)));
     }
 
     protected void deleteSubCategory(SubCategoryEntity responseEntity) {
@@ -137,7 +138,7 @@ public class BaseService {
     }
 
     protected AccountEntity searchAccountByUserIdAndAccountId(Long userId, Long accountId) {
-        return accountRepository.findByUser_userIdAndAccountId(userId, accountId);
+        return accountRepository.findByUser_userIdAndAccountId(userId, accountId).orElseThrow(() -> new AccountException(String.format("Account Not Found - UserId: [%s], accountId: [%s]", userId, accountId)));
     }
 
     protected void deleteAccountDB(AccountEntity accountEntity) {
